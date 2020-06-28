@@ -1,22 +1,25 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 
 using namespace std;
 
+/*
+ * Complete the timeConversion function below.
+ */
 string timeConversion(string s) {
+    /*
+     * Write your code here.
+     */
+
     string delimiter = ":";
     size_t i = 0;
     size_t next = 0;
     
     // initialize next to position of first occurrence of delimeter
-    next = s.find(delimiter, i);
-    
+    next = s.find(delimiter, i); 
+
     string time;
     string hour, min, sec;
     int count = 0;
-    
-    //Note: string::npos in this case is used to signify when we reach
-    //the end of a string and there are no more delimeters
     while(next != string::npos) {
         time = s.substr(i, next-i);
         
@@ -28,10 +31,10 @@ string timeConversion(string s) {
             min = time;
         }
         
-        i = next + delimiter.length(); // shift i to the next value that is not the delimiter
+        i = next + delimiter.length();
         next = s.find(delimiter, i);
         count++;
-        
+
     }
     
     sec = s.substr(i, 2); // rS -> remaining String without the AM or PM
@@ -43,13 +46,13 @@ string timeConversion(string s) {
         if(timePeriod == "PM") {
             if(h == 12) {
                 h = 12;
-            }
+            } 
             else {
                 h += 12;
-            }
+            }  
         }
     }
-    
+
     if(timePeriod == "AM") {
         if(hour == "12") {
             hour = "00";
@@ -57,23 +60,30 @@ string timeConversion(string s) {
     }
     
     string result;
-    
+
     if(timePeriod == "PM") {
         result = to_string(h) + ":" + min + ":" + sec;
     }
     else {
         result = hour + ":" + min + ":" + sec;
     }
-    
+
     return result;
-   
-    
+
 }
 
 int main()
 {
-    string s = "12:05:45AM";
-    string timeIn24hours = timeConversion(s);
-    cout << timeIn24hours << endl;
-   
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string s;
+    getline(cin, s);
+
+    string result = timeConversion(s);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
 }
