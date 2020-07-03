@@ -27,24 +27,25 @@ long candies(int n, vector<int> arr) {
     
     //int newWeight = 1;
     for(int i = n-2; i >= 0; i--) {
-       
-        if((arr.at(i) > arr.at(i+1)) && (ans.at(i) == ans.at(i+1))) {
+        
+        if((arr.at(i) > arr.at(i+1)) && (ans.at(i) <= ans.at(i+1))) {
             ans.at(i) = ans.at(i+1) + 1;
             cout << "entered";
         }
         
     }
     
-
+    
     
     for(auto i : ans) {
         sum += i;
     }
     
-
+    
     return sum;
     
 }
+
 
 int main()
 {
