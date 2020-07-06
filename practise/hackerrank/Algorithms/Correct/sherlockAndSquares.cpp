@@ -6,14 +6,33 @@ vector<string> split_string(string);
 
 // Complete the squares function below.
 int squares(int a, int b) {
-    int ans = 0;
-    for(int i = a; i <=b; i++) {
-        auto val = sqrt(i);
-        if(val == static_cast<int>(val)) {
-            ans++;
-        }
-    }
-    return ans;
+    // NAIVE APPROACH:
+    // NOTE: THIS WILL WORK, BUT IT IS NOT OPTIMIZED FOR CASES
+    // THE RANGE BETWEEN a AND b IS VERY LARGE
+    
+    //    int ans = 0;
+    //    for(int i = a; i <=b; i++) {
+    //        auto val = sqrt(i);
+    //        if(val == static_cast<int>(val)) {
+    //            ans++;
+    //        }
+    //    }
+    
+    
+    //OPTIMAL SOLUTION (passed all test cases on hackerrank):
+    //
+    // EXPLANATION <NOTE TO SELF> (Thanks to @vi123 on hackerank discussion board):
+    //
+    // Suppose you want to calculate all the square integers between
+    // 3 and 14. calculate the square roots of the end points..that
+    // will be around 1.73 and 3.74. Now the integers between 1.73 and
+    // 3.74 are 2 and 3 which is what we want. To get this we use the
+    // ceil function on 1.73 which becomes 2 and we use the floor function
+    // on 3.74 which becomes 3. Their difference is 1. We add 1 to the
+    // difference because we rounded off 1.73 to 2 and since 2 is an
+    // integer we need to consider it also.
+    int count = (int)floor(sqrt(b)) - (int)ceil(sqrt(a)) + 1;
+    return count;
     
 }
 
