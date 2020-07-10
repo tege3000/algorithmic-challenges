@@ -7,10 +7,12 @@ vector<string> split_string(string);
 // Complete the beautifulTriplets function below.
 int beautifulTriplets(int d, vector<int> arr) {
     vector <vector<int>> outer;
+
+
+    // This algorithm works. But its not optimized. 
+    // It currently has a time complexity of O(n^3)
     
     for(int i = 0; i < arr.size(); i++) {
-        
-        
         
         for(int j = i+1; j < arr.size(); j++) {
             
