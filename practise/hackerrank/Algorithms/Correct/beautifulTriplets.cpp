@@ -6,31 +6,45 @@ vector<string> split_string(string);
 
 // Complete the beautifulTriplets function below.
 int beautifulTriplets(int d, vector<int> arr) {
-    vector <vector<int>> outer;
-
-
-    // This algorithm works. But its not optimized. 
-    // It currently has a time complexity of O(n^3)
-    
+    // This is a much better algorithm. 
+    // With a much better time complexity that allows
+    // this code pass all the test cases
+    int count = 0;
     for(int i = 0; i < arr.size(); i++) {
-        
-        for(int j = i+1; j < arr.size(); j++) {
-            
-            for(int k = j+1; k < arr.size(); k++) {
-                vector <int> inner;
-                if(arr[j] - arr[i] == d && arr[k] - arr[j] == d) {
-                    inner.push_back(i);
-                    inner.push_back(j);
-                    inner.push_back(k);
-                    
-                    outer.push_back(inner);
-                }
-            }
-           
-            
+        if(find(arr.begin(), arr.end(), arr[i]+d) != arr.end() && find(arr.begin(), arr.end(), arr[i]+(d*2)) != arr.end()) {
+            count++;
         }
     }
-    return outer.size();
+    
+    
+    
+    
+//    // This algorithm works. But its not optimized.
+//    // Hence doesnt pass all the test cases.
+//    // It currently has a time complexity of O(n^3)
+//
+//    vector <vector<int>> outer;
+//    for(int i = 0; i < arr.size(); i++) {
+//
+//        for(int j = i+1; j < arr.size(); j++) {
+//
+//            for(int k = j+1; k < arr.size(); k++) {
+//                vector <int> inner;
+//                if(arr[j] - arr[i] == d && arr[k] - arr[j] == d) {
+//                    inner.push_back(i);
+//                    inner.push_back(j);
+//                    inner.push_back(k);
+//
+//                    outer.push_back(inner);
+//                }
+//            }
+//        }
+//
+//    }
+//  return outer.size();
+
+    
+    return count;
     
 }
 
