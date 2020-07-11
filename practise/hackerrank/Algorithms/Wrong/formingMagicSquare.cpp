@@ -1,63 +1,65 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
 // Complete the formingMagicSquare function below.
 int formingMagicSquare(vector<vector<int>> s) {
-    int ans = 0;
-    int n = s.size();
-    vector<vector<int>> outer;
+    int cost = 0;
+    int costSum = 0;
+    int magicNumber = 15;
     
-    
-    for(int i =0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            vector <int> inner;
-            inner.push_back(i);
-            inner.push_back(j);
-            inner.push_back(s.at(i).at(j));
-            outer.push_back(inner);
+    // handle the columns
+    for(int i = 0; i < s.size(); i++) {
+        int rowSum = 0;
+        //go through each row, check if sum of values
+        //is equal to magicNumber
+        for(int j = 0; j < s.size(); j++) {
+            rowSum += s[i][j];
         }
-    }
-    
-
-    
-    vector <int> anotherone;
-    int value= 0;
-    int replacement = 0;
-    int index_i = 0, index_j = 0;
-    for(int i = 0; i < outer.size(); i++) {
         
-        value = outer.at(i).at(2);
-        if(find(anotherone.begin(), anotherone.end(),value)!=anotherone.end()) {
-            index_i = outer.at(i).at(0);
-            index_j = outer.at(i).at(1);
-            
-            // check sum of diagonals == 15
-            // check sum of rows == 15
-            // check sum of columns == 15
-            
-            for(int a = 0; a < n; a++) {
-                for(int b = 0; b < n; b++) {
-                    
+        cout << "index i: " << i << "has rowSum of " << rowSum << endl;
+        // if the rowSum is not equal to the magic number,
+        // we want to ensure that that row eventually equals the magic number
+        // also we want to make sure that for that row, all the columns that intersect
+        // with it have a sum equal to the magic number.
+        if(rowSum != magicNumber) {
+            //check the columns for that spefic row
+            for(int a = 0; a < s.size(); a++) {
+                int colSum = 0;
+                for(int b = 0; b< s.size(); b++) {
+                    colSum += s[b][a];
+                
+                }
+                
+                cout << "Under index i " << i << ", index a: " << a << "has colSum of " << colSum << endl;
+
+                if(colSum != magicNumber) {
+                    int oldval = s[i][a];
+                    s[i][a] = magicNumber - (colSum - oldval);
+                    cout << "We changed this " << oldval << " to this " << s[i][a] << endl;
+                    cost = abs(s[i][a] - oldval);
+                    costSum += cost;
                 }
             }
             
             
-            // after finiding the replacement value 
-            s.at(index_i).at(index_j) = replacement;
-            
-            
-            
-        }
-        else {
-            anotherone.push_back(value);
         }
     }
     
- 
     
-    return ans;
+    
+    cout << "New 3x3 matrix is now: " << endl;
+    
+    for(auto i : s) {
+        for(auto j: i) {
+            cout << j << " ";
+        }
+        cout << "\n";
+    }
+    
+    return costSum;
     
 }
 
