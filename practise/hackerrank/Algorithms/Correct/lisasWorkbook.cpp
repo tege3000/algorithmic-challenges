@@ -15,21 +15,26 @@ int workbook(int n, int k, vector<int> arr) {
         
         
         for(int j = 1; j <= x; j=indexer+1) {
+            cout << "page " << pageNum << " has ";
             for(int a = j; a <= j+(k-1); a++) {
                 if(a <= x) {
                     if(a == pageNum) {
                         specialCount++;
-                        cout << a << " found at " << pageNum << endl;
+                        //cout << a << " found at " << pageNum << endl;
                     }
                     
                     indexer = a;
+                    
+                    cout << a << " ";
                 }
+                  
                 
             }
+            cout << endl;
             
             pageNum++;
         
-        }     
+        }        
     
     }
     
