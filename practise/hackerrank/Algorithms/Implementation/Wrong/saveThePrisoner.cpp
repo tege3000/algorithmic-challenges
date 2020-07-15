@@ -8,21 +8,95 @@ vector<string> split_string(string);
 
 // Complete the saveThePrisoner function below.
 int saveThePrisoner(int n, int m, int s) {
-    int counter = s;
-    
-    for(int i = 1; i < m; i++) {
+    //================ 2nd ATTEMPT =================
+    //
+    //This is my second attempt; which passes more test cases,
+    // due to reduction of time complexity to O(1)
+    // however the code itself is not entirely correct, 
+    // as it produces wrong answers to problems 
+    int ans;
+    if(m<n) {
+        if(s <m) {
+            if(abs((s+m)-n) > 1) {
+                ans = (n % m)+1;
+            }
+            else {
+                ans = s+m-1;
+            }
 
-        if(counter%n == 0) {
             
-            counter = 0;
+        }
+        else if(s==m) {
+            if(abs((s+m)-n) > 1) {
+                ans = (n % m);
+            }
+            else {
+                ans = s+m-1;
+            }
+            
+        }
+        else {
+            ans = ((s+m) % s) - 1;
+        }
+    }
+    else if(m == n) {
+        if(abs((s+m)-n) > 1) {
+            ans = (n%m) + (s-1);
+        }
+        else {
+            ans = s+m-1;
         }
         
-        counter++;
         
+    }
+    else {
+        
+        if(n >s) {
+
+            if((m+s)%n < 2) {
+                if(!((m+s)%n == 0)) {
+                    ans = n;
+                }
+                else {
+                    ans = n-s+1;
+                }
+            }
+            else {
+                ans = ((m+s)%n)-1;
+            }
+        }
+        else {
+            ans = (m % n) -1;
+            if(ans == 0) {
+                ans = n;
+            }
+        }
     }
     
     
-    return counter;
+    return ans;
+
+
+    // ================= 1ST ATTEMPT ===================
+
+    // //NOTE: This solution works, however 
+    // // its time complexity is bad, hence it fails the 
+    // // test cases that have time limits
+    // int counter = s;
+    
+    // for(int i = 1; i < m; i++) {
+
+    //     if(counter%n == 0) {
+            
+    //         counter = 0;
+    //     }
+        
+    //     counter++;
+        
+    // }
+    
+    
+    // return counter;
 }
 
 int main()
