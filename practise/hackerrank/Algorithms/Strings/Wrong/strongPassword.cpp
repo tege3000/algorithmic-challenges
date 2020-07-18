@@ -1,5 +1,4 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -43,6 +42,34 @@ int minimumNumber(int n, string password) {
     
     
     
+  
+    if(n >= 6 && testCasesPassed == 4) {
+        res = 0;
+    }
+    else if(n >= 6 && testCasesPassed < 4) {
+        res = maxTestCaseCount - testCasesPassed;
+    }
+    else if(n < 6 && testCasesPassed == 4) {
+        res = limit - n;
+    }
+    //this should be correct
+    else if(n < 6 && testCasesPassed < 4) {
+        if(limit - n >= 3) {
+            res = limit - n;
+        }
+        else {
+            res = maxTestCaseCount - testCasesPassed;
+            n = n+res;
+            if(n > 6) {
+                n = 6;
+            }
+            n = limit -n;
+            res = n+res;
+        }
+        
+    }
+    
+
     
     
     return res;
@@ -51,18 +78,20 @@ int minimumNumber(int n, string password) {
 
 int main()
 {
-    
+    ofstream fout(getenv("OUTPUT_PATH"));
+
     int n;
     cin >> n;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    
+
     string password;
     getline(cin, password);
-    
+
     int answer = minimumNumber(n, password);
-    
-    cout << answer << "\n";
-    
-    
+
+    fout << answer << "\n";
+
+    fout.close();
+
     return 0;
 }
