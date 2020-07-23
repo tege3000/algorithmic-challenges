@@ -72,7 +72,7 @@ public class Solution {
             }
             
             num = "";
-            if(check != -1) {
+            if(count == 0) {
                 break;
             }
         }
