@@ -4,22 +4,12 @@ using namespace std;
 
 // Complete the alternatingCharacters function below.
 int alternatingCharacters(string s) {
-    int counter = 0;
     int delCount = 0;
-    for(int i = 0; i < s.size(); i = counter) {
+    for(int i = 0; i < s.size(); i++) {
         if(s[i] == s[i+1]) {
-            cout << "here" << endl;
-            s.erase(s.begin()+(i+1));
             delCount++;
-            counter = i;
-        }
-        else {
-            counter++;
         }
         
-        if(i == 0 && s.size() == 1) {
-            break;
-        }
     }
     
     return delCount;
