@@ -3,6 +3,23 @@
 using namespace std;
 
 // Complete the gameOfThrones function below.
+
+
+/*
+ * NOTE: Here's a very good explanation for the solution
+ * (How to check if a string is a palindrome)
+ *
+ *
+ * Let's say we have a string abcxyz. If it's a palindrome, 
+ * than a =z , b=y, c = x. So we have a string abccba. So we 
+ * have a pair of each elements. Which means if the len of the
+ * string is even => there is at least one pair of each element 
+ * hence the count of each element should be even. But if the len 
+ * of the string is odd it means in the middle of the string there 
+ * should be one and only one unpaired element. So, the count of 
+ * ONLY one element should be odd.
+ *
+ */
 string gameOfThrones(string s) {
     sort(s.begin(), s.end());
     
