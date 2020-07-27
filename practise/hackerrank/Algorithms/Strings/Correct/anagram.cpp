@@ -21,12 +21,15 @@ int anagram(string s) {
     }
     
     int count = 0;
-    sort(s1.begin(), s1.end());
-    sort(s2.begin(), s2.end());
-
+    int pos = 0;
     for(int i = 0; i < s1.size(); i++) {
-        if(s1[i] != s2[i]) {
+        pos = s2.find(s1[i]);
+        if(pos == -1) {
             count++;
+        }
+        else {
+            //remove the element found
+            s2.erase(s2.begin()+pos);
         }
     }
     
