@@ -6,11 +6,6 @@ vector<string> split_string(string);
 
 // Complete the highestValuePalindrome function below.
 string highestValuePalindrome(string s, int n, int k) {
-    string nS = s;
-    sort(nS.begin(), nS.end());
-    
-    
-    
     int count = 0;
     char max = '9';
     //char min = *min_element(s.begin(), s.end());
@@ -28,7 +23,7 @@ string highestValuePalindrome(string s, int n, int k) {
             return "-1";
         }
     }
-
+    
     if(k>=n) {
         count += k;
         s="";
@@ -43,7 +38,6 @@ string highestValuePalindrome(string s, int n, int k) {
         }
         
     }
-    
     
     string s1, s2;
     if(n%2 == 0) {
@@ -60,17 +54,42 @@ string highestValuePalindrome(string s, int n, int k) {
     cout << s1 << endl;
     cout << s2 << endl;
     
+    if(k >= (s1+s2).size()) {
+        for(int i = 0; i < s1.size(); i++) {
+            if(s1[i] != '9') {
+                s1[i] = '9';
+                count++;
+            }
+            if(s2[i] != '9') {
+                s2[i] = '9';
+                count++;
+            }
+        }
+        
+        if(count == 0 && k > 0) {
+            middleEl = '9';
+        }
+        
+        if(n%2 == 0) {
+            return s1 + s2;
+        }
+        else {
+            return s1 + middleEl + s2;
+        }
+        
+    }
     
     for(int i = 0; i < s1.size(); i++) {
         if((s1[i] == s2[i]))  {
-            if(i != s1.size() -1) {
-                if(s1[i] != max && s2[i] != max) {
+            if(s1[i] != max && s2[i] != max) {
+                if(i != s1.size() -1) {
                     if(s1[i] > s1[i+1] && s2[i] > s2[i+1] && s1[i+1] == s2[i+1]) {
                         s1[i] = max;
                         count++;
                         s2[i] = max;
                         count++;
                     }
+                    
                 }
             }
             continue;
@@ -91,6 +110,9 @@ string highestValuePalindrome(string s, int n, int k) {
     cout << count << endl;
     if(count <= k) {
         reverse(s2.begin(), s2.end());
+        if(count == 0 && k > 0) {
+            middleEl = '9';
+        }
         
         if(n%2 == 0) {
             return s1 + s2;
@@ -106,6 +128,7 @@ string highestValuePalindrome(string s, int n, int k) {
     return "-1";
     
 }
+
 
 int main()
 {
