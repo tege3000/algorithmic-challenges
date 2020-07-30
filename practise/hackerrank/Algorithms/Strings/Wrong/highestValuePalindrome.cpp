@@ -13,7 +13,7 @@ string highestValuePalindrome(string s, int n, int k) {
     
     int count = 0;
     char max = '9';
-    char min = *min_element(s.begin(), s.end());
+    //char min = *min_element(s.begin(), s.end());
     int half = (n-1)/2;
     char middleEl = s[half];
     
@@ -29,6 +29,21 @@ string highestValuePalindrome(string s, int n, int k) {
         }
     }
 
+    if(k>=n) {
+        count += k;
+        s="";
+        for(int i = 0; i < n; i++) {
+            s.push_back('9');
+        }
+        if(count <= k) {
+            return s;
+        }
+        else {
+            return "-1";
+        }
+        
+    }
+    
     
     string s1, s2;
     if(n%2 == 0) {
@@ -41,10 +56,10 @@ string highestValuePalindrome(string s, int n, int k) {
     }
     
     reverse(s2.begin(), s2.end());
-
+    
     cout << s1 << endl;
     cout << s2 << endl;
-  
+    
     
     for(int i = 0; i < s1.size(); i++) {
         if((s1[i] == s2[i]))  {
@@ -86,11 +101,12 @@ string highestValuePalindrome(string s, int n, int k) {
         
     }
     
-
+    
     
     return "-1";
     
 }
+
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
