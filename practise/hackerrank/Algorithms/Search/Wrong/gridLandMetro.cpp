@@ -6,20 +6,33 @@ vector<string> split_string(string);
 
 // Complete the gridlandMetro function below.
 int gridlandMetro(int n, int m, int k, vector<vector<int>> track) {
+    sort(track.begin(), track.end());
     int count = 0;
     int r,c1,c2;
+    int prev = 0;
+    for(int i = 0; i < track.size(); i++) {
+        r = track[i][0];
+        c1 = track[i][1];
+        c2 = track[i][2];
+        cout << r << " "<< c1 << " "<< c2 <<endl;
+    }
+   
     
     for(int i = 0; i < track.size(); i++) {
         r = track[i][0];
         c1 = track[i][1];
         c2 = track[i][2];
+        
         if(i == 0){
             count += (c2 - c1) +1;
         }
         else {
-            if(r == track[i-1][0] && c1 <= track[i-1][2] && i != 0) {
-                if(c2 > track[i-1][2]) {
-                    count += (c2 - c1) +1  - (track[i-1][2] - c1 + 1 ) ;
+            if(track[i-1][2] > prev) {
+                prev = track[i-1][2];
+            }
+            if(r == track[i-1][0] && c1 <= prev && i != 0) {
+                if(c2 > prev) {
+                    count += (c2 - c1) +1  - (prev - c1 + 1 ) ;
                 }
                 else {
                     continue;
@@ -31,7 +44,7 @@ int gridlandMetro(int n, int m, int k, vector<vector<int>> track) {
         }
         
     }
-    
+    cout << count <<endl;
 
     return (n*m) - count;
     
