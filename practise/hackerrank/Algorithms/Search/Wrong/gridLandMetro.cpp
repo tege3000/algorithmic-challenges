@@ -30,10 +30,10 @@ int gridlandMetro(int n, int m, int k, vector<vector<int>> track) {
             if(r == track[i-1][0] && track[i-1][2] > prev) {
                 prev = track[i-1][2];
             }
-            
-            if(r == track[i-1][0] && c1 <= prev && i != 0) {
+
+            if(r == track[i-1][0] && c1 <= track[i-1][2] && i != 0) {
                 if(c2 > prev) {
-                    count += (c2 - c1) +1  - (prev - c1 + 1 ) ;
+                    count += c2 - prev;
                 }
                 else {
                     continue;
@@ -43,7 +43,6 @@ int gridlandMetro(int n, int m, int k, vector<vector<int>> track) {
                 count += (c2 - c1) +1;
             }
         }
-        cout << "count after index " << i << " is  " << count << endl;
 
         
     }
