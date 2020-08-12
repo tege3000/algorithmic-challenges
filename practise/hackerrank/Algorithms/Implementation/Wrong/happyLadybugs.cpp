@@ -1,76 +1,102 @@
 #include <iostream>
-
+#include <string>
 
 using namespace std;
 
 // Complete the happyLadybugs function below.
 string happyLadybugs(string b) {
-    char prev;
-    char match;
+    //cout << "beginning is: " << b << endl;
     
-    string found = "NO";
-    string status = "unfinished";
+    int allAlphas = 0;
+    for(int i = 0; i < b.size(); i++) {
+        if(b[i] != '_') {
+            allAlphas = 1;
+        }
+        else {
+            allAlphas = 0;
+            break;
+        }
+    }
     
-    // NOTE: This code actually makes the ladybugs happy
-    for(int a = 0; a < b.size(); a++) {
-        for(int i = 0; i < b.size(); i++) {
-            if(b[i] == '_'){
-                prev = b[i-1];
+    if(allAlphas == 1) {
+        return "NO";
+    }
+    
+    int nonEmptyIndex = 0;
+    while(b[b.size()-1] != '_') {
+        for(int i = 0; i < b.size()-1; i++) {
+            if(b[i+1] == '_') {
+                int found = b.find(b[i], i+1);
                 
-                for(int j = 0; j < b.size(); j++) {
-                    if(j != i-1) {
-                        if(b[j] == prev) {
-                            match = b[j];
-                            b[j] = '_';
-                        }
-                    
-                    }
+                if(found != -1) {
+                    b[i+1] = b[i];
+                    b[found] = '_';
+                    break;
                 }
                 
-                //cout << "found or not ? " << found << endl;
+                for(int j = i+2; j < b.size(); j++) {
+                    if(b[j] != '_') {
+                        nonEmptyIndex = j;
+                        break;
+                    }
+                }
+                found = b.find(b[nonEmptyIndex]);
                 
-                b[i] = match;
-                status = "finished";
+                if(found != -1) {
+                    b[nonEmptyIndex-1] = b[found];
+                    b[found] = '_';
+                    break;
+                }
                 
             }
             
+            
         }
-        
-        //cout << "result: " << b << endl;
-        
-        
+        //cout << b << endl;
     }
     
-    //NOTE: Everything from here is hacky; essentially used
-    // tricky ways to pass the first 2 sample test cases
-    // but all the other test cases fail!!
-    //
-    // So need to find a better way to determine if the
-    // ladybugs are happy, as stated in the problem.
-    int count = 0;
-    for(int i = 0; i < b.size(); i++) {
+    
+    //cout << "result is: " << b << endl;
+    int count;
+    int counter = 1;
+    for(int i = 0; i < b.size(); i= counter+1) {
         if(b[i] == '_') {
-            count++;
+            counter++;
+            count = 2;
         }
+        else {
+            count = 1;
+            for(int j = i+1; j < b.size(); j++) {
+                //cout << b[i] << " " << b[j] << endl;
+                if(b[i] == '_') {
+                    counter++;
+                    count = 2;
+                    break;
+                }
+                
+                if(b[i] == b[j]) {
+                    counter = j;
+                    count++;
+                }
+                else {
+                    continue;
+                }
+                
+            }
+        }
+        
+        if(count <= 1) {
+            return "NO";
+        }
+
     }
-    
-    if(!(count %2 == 0) && count != 1 && status == "finished") {
-        found = "NO";
-    }
-    else if(status == "unfinished"){
-        found = "NO";
-    }
-    else {
-        found = "YES";
-    }
-    
-    return found;
-    
+
+    return "YES";
 }
+
 
 int main()
 {
-    
     int g;
     cin >> g;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -87,7 +113,6 @@ int main()
         
         cout << result << "\n";
     }
-    
     
     return 0;
 }
