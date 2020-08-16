@@ -6,6 +6,14 @@ vector<string> split_string(string);
 
 // Complete the minimumAbsoluteDifference function below.
 int minimumAbsoluteDifference(vector<int> arr) {
+
+    /*
+     * Note that the array was sorted beforehand, so that
+     * considering differences of consecutive elements is 
+     * all we need to check to find the minimum difference. 
+     * No point in checking the difference between i and i+2 
+     * if we know the difference between i and i+1 is definitely less.
+     */
     sort(arr.begin(), arr.end());
     int minVal = abs(arr[0] - arr[1]);
     for(int i = 1; i < arr.size(); i++) {
