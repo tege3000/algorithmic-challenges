@@ -61,52 +61,95 @@ int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) 
             chessboard[n-r_q][i] = 1;
         }
     }
+    
+    int counter = (c_q-1)-1;
     //populate the left diagonals above that queen can move to
     for(int i = n-r_q-1; i >= 0; i--) {
-        for(int j = i+1; j >= 0; j--) {
-            chessboard[i][j] = 1;
+        for(int j = counter; j >= 0; j--) {
+            if(chessboard[i][j] == 2) {
+                break;
+            }
+            else {
+                chessboard[i][j] = 1;
+                break;
+            }
+        }
+        
+        if(chessboard[i][counter] == 2) {
             break;
         }
+        counter--;
     }
     
+    counter = (c_q-1)+1;
     //populate the right diagonals below that queen can move to
     for(int i = n-r_q+1; i < chessboard.size(); i++) {
-        for(int j = i+1; j < chessboard.size(); j++) {
-            chessboard[i][j] = 1;
+        for(int j = counter; j < chessboard.size(); j++) {
+            if(chessboard[i][j] == 2) {
+                break;
+            }
+            else {
+                chessboard[i][j] = 1;
+                break;
+            }
+        }
+        if(chessboard[i][counter] == 2) {
             break;
         }
+        counter++;
     }
     
     //populate the left diagonals below that queen can move to
+    counter = (c_q-1)-1;
     for(int i = n-r_q+1; i < chessboard.size(); i++) {
-        for(int j = n-1-i-1; j >= 0; j--) {
-            chessboard[i][j] = 1;
+        for(int j = counter; j >= 0; j--) {
+            if(chessboard[i][j] == 2) {
+                break;
+            }
+            else {
+                chessboard[i][j] = 1;
+                break;
+            }
+        }
+        if(chessboard[i][counter] == 2) {
             break;
         }
-    }
-
-    //populate the right diagonals above that queen can move to
-    for(int i = n-r_q-1; i >=0; i--) {
-        for(int j = n-1-i-1; j < chessboard.size(); j++) {
-            chessboard[i][j] = 1;
-            break;
-        }
+        counter--;
     }
     
-//    for(int i = 0; i < n; i++) {
-//        for(int j = 0; j < n; j++) {
-//            cout << chessboard[i][j] << " ";
-//        }
-//        cout << "\n";
-//    }
+    counter = (c_q-1)+1;
+    //populate the right diagonals above that queen can move to
+    for(int i = n-r_q-1; i >=0; i--) {
+        for(int j = counter; j < chessboard.size(); j++) {
+            if(chessboard[i][j] == 2) {
+                break;
+            }
+            else {
+                chessboard[i][j] = 1;
+                break;
+            }
+        }
+        if(chessboard[i][counter] == 2) {
+            break;
+        }
+        counter++;
+    }
+    
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            cout << chessboard[i][j] << " ";
+        }
+        cout << "\n";
+    }
     
     int ans = 0;
     for(int i = 0; i < chessboard.size(); i++) {
         ans += count(chessboard[i].begin(), chessboard[i].end(), 1);
     }
-  
+    
     return ans-1;
 }
+
 
 int main()
 {
