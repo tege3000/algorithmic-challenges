@@ -6,8 +6,18 @@ vector<string> split_string(string);
 
 // Complete the queensAttack function below.
 int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) {
-    vector<vector<int>> chessboard;
+    // Added this as an optimization
+    // for this special case
+    // but it seems that this case 
+    // is not tested on hackerrank
+    // if(k == 0 && n%2 == 1) {
+    //     if(r_q == c_q && r_q == (1+n)/2) {
+    //         return pow(n,2) -1;
+    //     }
+    // }
     
+    vector<vector<int>> chessboard;
+
     for(int i = 0; i < n; i++) {
         vector<int> inner;
         for(int j = 0; j < n; j++) {
@@ -22,55 +32,56 @@ int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) 
         chessboard[n - obstacles[i][0]][obstacles[i][1] - 1] = 2;
     }
     
-    // populate the rows above that queen can move to
+    int count = 0;
+    // for the rows above that queen can move to
     for(int i = n-r_q-1; i >= 0 ; i--) {
         if(chessboard[i][c_q-1] == 2) {
             break;
         }
         else {
-            chessboard[i][c_q-1] = 1;
+            count++;
         }
     }
     
-    // populate the rows below that queen can move to
+    // for the rows below that queen can move to
     for(int i = n-r_q+1; i < chessboard.size(); i++) {
         if(chessboard[i][c_q-1] == 2) {
             break;
         }
         else {
-            chessboard[i][c_q-1] = 1;
+            count++;
         }
     }
     
-    //populate the colums to the left that queen can move to
+    //for the colums to the left that queen can move to
     for(int i = c_q-1-1; i >= 0; i--) {
         if(chessboard[n-r_q][i] == 2) {
             break;
         }
         else {
-            chessboard[n-r_q][i] = 1;
+            count++;
         }
     }
     
-    //populate the colums to the right that queen can move to
+    //for the colums to the right that queen can move to
     for(int i = c_q; i < chessboard.size(); i++) {
         if(chessboard[n-r_q][i] == 2) {
             break;
         }
         else {
-            chessboard[n-r_q][i] = 1;
+            count++;
         }
     }
     
     int counter = (c_q-1)-1;
-    //populate the left diagonals above that queen can move to
+    //for the left diagonals above that queen can move to
     for(int i = n-r_q-1; i >= 0; i--) {
         for(int j = counter; j >= 0; j--) {
             if(chessboard[i][j] == 2) {
                 break;
             }
             else {
-                chessboard[i][j] = 1;
+                count++;
                 break;
             }
         }
@@ -82,14 +93,14 @@ int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) 
     }
     
     counter = (c_q-1)+1;
-    //populate the right diagonals below that queen can move to
+    //for the right diagonals below that queen can move to
     for(int i = n-r_q+1; i < chessboard.size(); i++) {
         for(int j = counter; j < chessboard.size(); j++) {
             if(chessboard[i][j] == 2) {
                 break;
             }
             else {
-                chessboard[i][j] = 1;
+                count++;
                 break;
             }
         }
@@ -99,7 +110,7 @@ int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) 
         counter++;
     }
     
-    //populate the left diagonals below that queen can move to
+    //for the left diagonals below that queen can move to
     counter = (c_q-1)-1;
     for(int i = n-r_q+1; i < chessboard.size(); i++) {
         for(int j = counter; j >= 0; j--) {
@@ -107,7 +118,7 @@ int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) 
                 break;
             }
             else {
-                chessboard[i][j] = 1;
+                count++;
                 break;
             }
         }
@@ -118,14 +129,14 @@ int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) 
     }
     
     counter = (c_q-1)+1;
-    //populate the right diagonals above that queen can move to
+    //for the right diagonals above that queen can move to
     for(int i = n-r_q-1; i >=0; i--) {
         for(int j = counter; j < chessboard.size(); j++) {
             if(chessboard[i][j] == 2) {
                 break;
             }
             else {
-                chessboard[i][j] = 1;
+                count++;
                 break;
             }
         }
@@ -142,12 +153,10 @@ int queensAttack(int n, int k, int r_q, int c_q, vector<vector<int>> obstacles) 
         cout << "\n";
     }
     
-    int ans = 0;
-    for(int i = 0; i < chessboard.size(); i++) {
-        ans += count(chessboard[i].begin(), chessboard[i].end(), 1);
-    }
+
+
     
-    return ans-1;
+    return count;
 }
 
 
