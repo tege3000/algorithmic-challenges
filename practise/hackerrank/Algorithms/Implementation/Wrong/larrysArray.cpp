@@ -12,66 +12,83 @@ string larrysArray(vector<int> A) {
     int minPos = 0;
     int k = 3;
     //if(A[0] == 1) {
-        while(!(is_sorted(A.begin(), A.end()))) {
-            auto minEl = min_element(A.begin()+next, A.end());
-            minPos = distance(A.begin(), minEl);
-            
-            cout << "min el is " << *minEl << endl;
-            cout << "min pos is " << minPos << endl;
-            cout << "next is " << next << endl;
-            
-            cout << "BEFORE rotation "<< endl;
-            for(int i = 0; i < n; i++) {
-                cout << A[i] << " ";
-            }
-            cout << "\n";
-            
-            
-            if(minPos - (k-1) < next) {
-                if(*minEl > A[minPos-1] && next != 0) {
-                    return "NO";
-                }
-                for(int i = 0; i < k; i++) {
-                    rotate(A.begin()+(minPos-1), A.begin()+1, A.begin()+(minPos+(k-1)));
-                    
-                    if(is_sorted(A.begin()+(minPos-1), A.begin()+(minPos+(k-1)))) {
-                        break;
+    while(!(is_sorted(A.begin(), A.end()))) {
+        auto minEl = min_element(A.begin()+next, A.end());
+        minPos = distance(A.begin(), minEl);
+        
+        cout << "min el is " << *minEl << endl;
+        cout << "min pos is " << minPos << endl;
+        cout << "next is " << next << endl;
+        
+        cout << "BEFORE rotation "<< endl;
+        for(int i = 0; i < n; i++) {
+            cout << A[i] << " ";
+        }
+        cout << "\n";
+        
+        
+        if(minPos - (k-1) < next) {
+            if(*minEl != A[next]) {
+                if(minPos-(k-1) >=1) {
+                    if(*minEl > A[minPos-(k-1)]) {
+                        return "NO";
                     }
-                }
-            }
-            else {
-                if(*minEl > A[minPos- (k-1)]) {
-                    return "NO";
-                }
-                cout << "elseseeeee" << endl;
-                for(int i = 0; i < k; i++) {
-                    rotate(A.begin()+(minPos-(k-1)), A.begin()+1, A.begin()+(minPos+1));
-                    cout << "After rotation " << i+1 << endl;
+                    //            for(int i = 0; i < k; i++) {
+                    //                rotate(A.begin()+(minPos-1), A.begin()+1, A.begin()+(minPos+(k-1)));
+                    //
+                    //                if(is_sorted(A.begin()+(minPos-1), A.begin()+(minPos+(k-1)))) {
+                    //                    break;
+                    //                }
+                    //            }
+                    rotate(A.begin()+(minPos-1), A.begin()+(minPos-1)+(k-1), A.begin()+(minPos+(k-1)));
+                    
+                    cout << "After rotation " << endl;
                     for(int i = 0; i < n; i++) {
                         cout << A[i] << " ";
                     }
-                    cout << "\n";
-                    if(is_sorted(A.begin()+(minPos-(k-1)), A.begin()+(minPos+1))) {
-                        break;
-                    }
                 }
                 
-                
             }
             
-            if(A[next] == *minEl) {
-                next++;
-            }
-            
-            if(next == n-1) {
-                cout << "hehe"<< endl;
 
+        }
+        else {
+            if(*minEl > A[minPos- (k-1)]) {
                 return "NO";
             }
+            cout << "elseseeeee" << endl;
+//            for(int i = 0; i < k; i++) {
+//                rotate(A.begin()+(minPos-(k-1)), A.begin()+1, A.begin()+(minPos+1));
+//                cout << "\n";
+//                if(is_sorted(A.begin()+(minPos-(k-1)), A.begin()+(minPos+1))) {
+//                    break;
+//                }
+//            }
+            
+            rotate(A.begin()+(minPos-(k-1)), A.begin()+(minPos-(k-1))+(k-1), A.begin()+(minPos+1));
+            cout << "After rotation " << endl;
+            for(int i = 0; i < n; i++) {
+                cout << A[i] << " ";
+            }
+
+
+            
             
         }
         
+        if(A[next] == *minEl) {
+            next++;
+        }
         
+        if(next == n-1) {
+            cout << "hehe"<< endl;
+            
+            return "NO";
+        }
+        
+    }
+    
+    
     //}
     return "YES";
 }
