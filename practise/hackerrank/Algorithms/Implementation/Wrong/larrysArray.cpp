@@ -29,25 +29,22 @@ string larrysArray(vector<int> A) {
         
         if(minPos - (k-1) < next) {
             if(*minEl != A[next]) {
-                if(minPos-(k-1) >=1) {
-                    if(*minEl > A[minPos-(k-1)]) {
-                        return "NO";
-                    }
-                    //            for(int i = 0; i < k; i++) {
-                    //                rotate(A.begin()+(minPos-1), A.begin()+1, A.begin()+(minPos+(k-1)));
-                    //
-                    //                if(is_sorted(A.begin()+(minPos-1), A.begin()+(minPos+(k-1)))) {
-                    //                    break;
-                    //                }
-                    //            }
-                    rotate(A.begin()+(minPos-1), A.begin()+(minPos-1)+(k-1), A.begin()+(minPos+(k-1)));
-                    
-                    cout << "After rotation " << endl;
-                    for(int i = 0; i < n; i++) {
-                        cout << A[i] << " ";
-                    }
+                if(*minEl > A[minPos-(k-1)] && minPos-(k-1) >=1) {
+                    return "NO";
                 }
+                //            for(int i = 0; i < k; i++) {
+                //                rotate(A.begin()+(minPos-1), A.begin()+1, A.begin()+(minPos+(k-1)));
+                //
+                //                if(is_sorted(A.begin()+(minPos-1), A.begin()+(minPos+(k-1)))) {
+                //                    break;
+                //                }
+                //            }
+                rotate(A.begin()+(minPos-1), A.begin()+(minPos-1)+(k-1), A.begin()+(minPos+(k-1)));
                 
+                cout << "After rotation " << endl;
+                for(int i = 0; i < n; i++) {
+                    cout << A[i] << " ";
+                }
             }
             
 
