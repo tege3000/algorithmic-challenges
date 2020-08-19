@@ -9,9 +9,6 @@ string organizingContainers(vector<vector<int>> container) {
     
     int sum = 0, isPossible = 1, occurrenceCountRows = 0, occurrenceCountCols = 0;
    
-    
-    
-    
     while(isPossible == 1) {
         for(int a = 0; a < n-1; a++) {
             for(int b = 0; b < n; b++) {
@@ -24,7 +21,7 @@ string organizingContainers(vector<vector<int>> container) {
                         break;
                     }
                     
-                    if(container[a+1][k] == 0 || container[a+1][k] == container[a][k]) {
+                    if(container[a+1][k] == 0 || b == k) {
                         continue;
                     }
                     
@@ -37,14 +34,14 @@ string organizingContainers(vector<vector<int>> container) {
                     container[a][b] = 0;
                     
                   
-                    // display the vector of containers
-                    for(int i = 0; i < n; i++) {
-                        for(int j = 0; j < n; j++) {
-                            cout << container[i][j] << " ";
-                        }
-                        cout << "\n";
-                    }
-                    cout << "\n";
+//                    // display the vector of containers
+//                    for(int i = 0; i < n; i++) {
+//                        for(int j = 0; j < n; j++) {
+//                            cout << container[i][j] << " ";
+//                        }
+//                        cout << "\n";
+//                    }
+//                    cout << "\n";
                     
                     
                 }
@@ -87,7 +84,7 @@ string organizingContainers(vector<vector<int>> container) {
                 isPossible = 1;
             }
         }
-        cout << "heheheh" << endl;
+        //cout << "heheheh" << endl;
         if(isPossible == 0) {
             return "Impossible";
         }
