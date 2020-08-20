@@ -8,13 +8,8 @@ int main()
 {
     int n;
     cin >> n;
-    int x;
-    int y;
-    int z;
-    int sum_x =  0;
-    int sum_y = 0;
-    int sum_z = 0;
-    
+    int x, y, z;
+    int sum_x =  0, sum_y = 0, sum_z = 0;
     
     vector<vector<int>> v;
     
@@ -30,18 +25,13 @@ int main()
         v.push_back(innerV);
     }
     
-   
+    
     for(int i = 0; i < n; i++) {
         sum_x += v[i][0];
-    }
-    
-    for(int i = 0; i < n; i++) {
         sum_y += v[i][1];
-    }
-    
-    for(int i = 0; i < n; i++) {
         sum_z += v[i][2];
     }
+    
     
     if(sum_x == 0 && sum_y == 0 && sum_z == 0) {
         cout << "YES" << "\n";
