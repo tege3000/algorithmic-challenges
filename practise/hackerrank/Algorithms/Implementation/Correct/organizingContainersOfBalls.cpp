@@ -4,6 +4,18 @@ using namespace std;
 
 // Complete the organizingContainers function below.
 string organizingContainers(vector<vector<int>> container) {
+    /*
+     * Explanation of algorithm (Thanks to @TheLastOrca on hackerrank): 
+     *
+     * Since "swap operation does not change the number of
+     * balls in any container", after all swaps, the resulting
+     * number of balls in each container should still be the same.
+     * That means, each type needs to occupy any one of the containers.
+     * If there is a missmatch, it means that type of ball has nowhere
+     * else to go and the answer is impossible.
+     */
+
+
     int n = container.size();
     
     vector<long> boxes;
