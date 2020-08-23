@@ -20,7 +20,6 @@ string gridSearch(vector<string> G, vector<string> P, int r, int R) {
             if(k == P[0]) {
                 vector <string> test;
 
-                cout << "entered " << i << j << endl;
                 for(int x = i; x < i+r; x++) {
                     kNew = "";
                     for(int y = j; y < j+m; y++) {
@@ -29,7 +28,6 @@ string gridSearch(vector<string> G, vector<string> P, int r, int R) {
                     test.push_back(kNew);
                 }
                 
-                cout << "\n";
                 if(test == P) {
                     return "YES";
                 }
