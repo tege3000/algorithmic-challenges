@@ -52,9 +52,12 @@ string happyLadybugs(string b) {
         return "YES";
     }
     
-    
+    // IF ALL CHARACTERS ARE NOT THE SAME,
+    // OR ALL CHARACTERS ARE NOT ALPHABETS
+    // THEN THEY ARE A MIXTURE OF '_' AND ALPHABETS
     sort(b.begin(), b.end());
     int count = 1;
+    
     // find if the resulting string is happy
     for(int i = 0; i < b.size(); i++) {
         if(b[i] != '_') {
