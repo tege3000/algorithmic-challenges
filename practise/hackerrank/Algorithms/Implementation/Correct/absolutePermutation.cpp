@@ -15,8 +15,10 @@ vector<int> absolutePermutation(int n, int k) {
     if(k != 0) {
         for(int i = 0; i < n; i += k*2) {
             
-            
             for(int j = i; j < i+k; j++) {
+                if(j+k > n) {
+                    break;
+                }
                 swap(perms[j], perms[j+k]);
             }
             
@@ -24,7 +26,6 @@ vector<int> absolutePermutation(int n, int k) {
     }
     
     
-    // check if correct
     for(int i = 0; i < perms.size(); i++) {
         if(abs(perms[i] - (i+1)) == k && perms[i] != 0) {
             continue;
