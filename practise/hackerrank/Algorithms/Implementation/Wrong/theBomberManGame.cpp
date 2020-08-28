@@ -13,8 +13,8 @@ vector<string> bomberMan(int n, vector<string> grid) {
     if(n == 1) {
         return grid;
     }
-    
-    for(int z = 0; z < n; z++) {
+    int z = 1;
+    while(z < n) {
         // initially do nothing, except identify the marked indexes with bombs
         vector<vector<int>> marked;
         
