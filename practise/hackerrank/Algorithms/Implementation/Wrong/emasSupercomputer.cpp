@@ -6,82 +6,148 @@ vector<string> split_string(string);
 
 // Complete the twoPluses function below.
 int twoPluses(vector<string> grid) {
+    int upCount, rightCount, downCount, leftCount, rowCount, colCount, count;
+    int y_start, y_end, x_start, x_end;
+    int isOverlap;
     vector<int> areas;
     vector<vector<int>> avoidOverlap;
-    int count = 0;
-    int moveon = 0;
-    for(int i = 0; i <= grid.size() - 3; i++) {
-        for(int j = 0; j <= grid[0].size()-3; j++) {
-            
-            if(grid[i][j+1] == 'G' && grid[i+1][j+1] == 'G' && grid[i+2][j+1] == 'G' && grid[i+1][j] == 'G' && grid[i+1][j+1] == 'G' && grid[i+1][j+2] == 'G') {
-                if(count <= 0) {
-                    areas.push_back(5);
-                    
-                    vector<int> index1;
-                    index1.push_back(i);
-                    index1.push_back(j+1);
-                    avoidOverlap.push_back(index1);
-                    vector<int> index2;
-                    index2.push_back(i+2);
-                    index2.push_back(j+1);
-                    avoidOverlap.push_back(index2);
-                    vector<int> index3;
-                    index3.push_back(i+1);
-                    index3.push_back(j);
-                    avoidOverlap.push_back(index3);
-                    vector<int> index4;
-                    index4.push_back(i+1);
-                    index4.push_back(j+2);
-                    avoidOverlap.push_back(index4);
-                    vector<int> index5;
-                    index5.push_back(i+1);
-                    index5.push_back(j+1);
-                    avoidOverlap.push_back(index5);
-                }
-                else {
-                    
-                    for(int a = 0; a < avoidOverlap.size(); a++) {
-//                        cout << "current: "<< i  << " " << j+1 << " old: " << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
-//                        cout << "current: "<< i+2  << " " << j+1 << " old: " << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
-//                        cout << "current: "<< i+1  << " " << j << " old: " << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
-//                        cout << "current: "<< i+1  << " " << j+2 << " old: " << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
-//                        cout << "current: "<< i+1  << " " << j+1 << " old: " << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
-//                        cout << "\n";
-                        
-                        if((i == avoidOverlap[a][0] && j+1 == avoidOverlap[a][1]) ||
-                           (i+2 == avoidOverlap[a][0] && j+1 == avoidOverlap[a][1]) ||
-                           (i+1 == avoidOverlap[a][0] && j == avoidOverlap[a][1]) ||
-                           (i+1 == avoidOverlap[a][0] && j+2 == avoidOverlap[a][1]) ||
-                           (i+1 == avoidOverlap[a][0] && j+1 == avoidOverlap[a][1])) {
-                            moveon = 1;
-                        }
-                    }
-                    
-                    if(moveon == 1) {
-                        moveon = 0;
-                        continue;
+    for(int i = 1; i < grid.size()-1; i++) {
+        for(int j = 1; j < grid[0].size()-1; j++) {
+            upCount = 0;
+            rightCount = 0;
+            downCount = 0;
+            leftCount = 0;
+            rowCount = 0;
+            colCount = 0;
+            count = 0;
+            y_start = 0;
+            y_end = 0;
+            x_start = 0;
+            x_end = 0;
+            isOverlap = 0;
+            if(grid[i][j] == 'G' && grid[i+1][j] == 'G' && grid[i-1][j] == 'G' && grid[i][j-1] == 'G' && grid[i][j+1] == 'G') {
+                
+           
+                //move up
+                for(int a = i+1; a >= 0; a--) {
+                    if(grid[a][j] == 'G') {
+                        upCount++;
                     }
                     else {
-                        areas.push_back(5);
-
+                        break;
                     }
-                    
                 }
-                count++;
+                
+                //move down
+                for(int a = i+1; a < grid.size(); a++) {
+                    if(grid[a][j] == 'G') {
+                        downCount++;
+                    }
+                    else {
+                        break;
+                    }
+                }
+                
+                //move left
+                for(int a = j-1; a >= 0; a--) {
+                    if(grid[i][a] == 'G') {
+                        leftCount++;
+                    }
+                    else {
+                        break;
+                    }
+                }
+                
+                //move right
+                for(int a = j+1; a < grid[0].size(); a++) {
+                    if(grid[i][a] == 'G') {
+                        rightCount++;
+                    }
+                    else {
+                        break;
+                    }
+                }
+                
+                
+                //check if any of the points on the cross exist in avoidOverlap array
+                
+                x_start = j - min(min(leftCount, rightCount), min(upCount, downCount));
+                x_end = j+ min(min(leftCount, rightCount), min(upCount, downCount));
+                y_start = i - min(min(leftCount, rightCount), min(upCount, downCount));
+                y_end = i + min(min(leftCount, rightCount), min(upCount, downCount));
+                
+                for(int x = x_start; x <= x_end; x++) {
+                    for(int a = 0; a < avoidOverlap.size(); a++) {
+                        if(x == avoidOverlap[a][0] && j == avoidOverlap[a][1]) {
+                            isOverlap = 1;
+                            break;
+                        }
+                    }
+                    if(isOverlap  == 1) {
+                        break;
+                    }
+                }
+                
+                for(int y = y_start; y <= y_end; y++) {
+                    for(int a = 0; a < avoidOverlap.size(); a++) {
+                        if(y == avoidOverlap[a][0] && i == avoidOverlap[a][1]) {
+                            isOverlap = 1;
+                            break;
+                        }
+                    }
+                    if(isOverlap == 1) {
+                        break;
+                    }
+                }
+                
+                
+                
+                if(isOverlap == 0) {
+                    rowCount = 2 * min(leftCount, rightCount);
+                    colCount = 2 * min(upCount, downCount);
+                    count = 2 * min(rowCount, colCount);
+                    
+                    cout << "i " << i << "j " << j << endl;
+                    
+                    cout << x_start << " " << x_end << endl;
+                    cout << y_start << " " << y_end << endl;
+                    
+                    
+                    areas.push_back(count+1);
+                    
+                    
+                    vector <int> inner;
+                    inner.push_back(y_start);
+                    inner.push_back(j);
+                    avoidOverlap.push_back(inner);
+                    
+                    vector <int> inner2;
+                    inner2.push_back(y_end);
+                    inner2.push_back(j);
+                    avoidOverlap.push_back(inner2);
+                    
+                    vector <int> inner3;
+                    inner3.push_back(i);
+                    inner3.push_back(x_start);
+                    avoidOverlap.push_back(inner3);
+                    
+                    vector <int> inner4;
+                    inner4.push_back(i);
+                    inner4.push_back(x_end);
+                    avoidOverlap.push_back(inner4);
+                }
                 
                 
             }
             
-            
         }
-        
+      
     }
     
     if(areas[1] == 0) {
         areas[1] = 1;
     }
     return areas[0] * areas[1];
-    
 }
 int main()
 {
