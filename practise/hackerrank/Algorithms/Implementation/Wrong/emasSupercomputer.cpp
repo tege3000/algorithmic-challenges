@@ -107,13 +107,13 @@ int twoPluses(vector<string> grid) {
                 rowCount = 2 * min(leftCount, rightCount);
                 colCount = 2 * min(upCount, downCount);
                 count = 2 * min(rowCount, colCount);
-                cout << "============================" << endl;
-                cout << "i " << i << "j " << j << endl;
-                
-                cout << x_start << " " << x_end << endl;
-                cout << y_start << " " << y_end << endl;
-                
-                cout << count+1 << endl;
+//                cout << "============================" << endl;
+//                cout << "i " << i << "j " << j << endl;
+//
+//                cout << x_start << " " << x_end << endl;
+//                cout << y_start << " " << y_end << endl;
+//
+//                cout << count+1 << endl;
                 int sizeArea = areas.size();
                 
                 if(sizeArea >= 1) {
@@ -122,10 +122,10 @@ int twoPluses(vector<string> grid) {
                 
                 if(isOverlap == 0) {
                     
-                    cout << "For avoid Overlap " << endl;
-                    for(int a = 0; a < avoidOverlap.size(); a++) {
-                        cout << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
-                    }
+//                    cout << "For avoid Overlap " << endl;
+//                    for(int a = 0; a < avoidOverlap.size(); a++) {
+//                        cout << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
+//                    }
                     
                     areas.push_back(count+1);
                     
@@ -148,12 +148,17 @@ int twoPluses(vector<string> grid) {
                 }
                 else {
                     // if theres an overlap, we only add it if its currently the highest area
+                    // then we remove the value it overlapped with that is smaller than the current max
+                    // that value will be the last element inserted into areas
+                    
+                    
                     if(count+1 > maxEl) {
-                        cout << "For avoid Overlap " << endl;
-                        for(int a = 0; a < avoidOverlap.size(); a++) {
-                            cout << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
-                        }
-                        
+                        areas.pop_back();
+//                        cout << "For avoid Overlap " << endl;
+//                        for(int a = 0; a < avoidOverlap.size(); a++) {
+//                            cout << avoidOverlap[a][0] << " " << avoidOverlap[a][1] << endl;
+//                        }
+//
                         areas.push_back(count+1);
                         
                         for(int a = x_start; a <= x_end; a++) {
