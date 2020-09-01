@@ -15,6 +15,7 @@ void almostSorted(vector<int> arr) {
     }
    else {
        int pos = distance(arr.begin(), max_element(arr.begin(), arr.begin()+arr.size()));
+//       cout << *max_element(arr.begin(), arr.begin()+arr.size()) << " found at " << pos << endl;
        if(pos != -1) {
            if(pos != arr.size() - 1) {
                iter_swap(arr.begin()+pos, arr.begin()+pos+1);
@@ -41,7 +42,13 @@ void almostSorted(vector<int> arr) {
                for(int i = 0; i < arr.size(); i++) {
                    if(arr[i] > arr[i+1]) {
                        l = i;
-                       r = i+1;
+                       break;
+                   }
+               }
+               
+               for(int i = l+1; i < arr.size(); i++) {
+                   if(arr[i] > arr[l]) {
+                       r = i-1;
                        break;
                    }
                }
