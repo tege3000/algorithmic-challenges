@@ -13,88 +13,52 @@ void almostSorted(vector<int> arr) {
         cout << "yes" << endl;
         isSorted = 1;
     }
-   else {
-       int pos = distance(arr.begin(), max_element(arr.begin(), arr.begin()+arr.size()));
-//       cout << *max_element(arr.begin(), arr.begin()+arr.size()) << " found at " << pos << endl;
-       if(pos != -1) {
-           if(pos != arr.size() - 1) {
-               iter_swap(arr.begin()+pos, arr.begin()+pos+1);
-               
-               if(is_sorted(arr.begin(), arr.end())) {
-                   cout << "yes" << endl;
-                   cout << "swap " << pos+1 << " " << pos+2 << endl;
-                   isSorted = 1;
-               }
-               else {
-                   // swap back to normal form
-                   iter_swap(arr.begin()+pos, arr.begin()+pos+1);
-                   //then reverse
-                   reverse(arr.begin()+pos, arr.end());
-                   if(is_sorted(arr.begin(), arr.end())) {
-                       cout << "yes" << endl;
-                       cout << "reverse " << pos+1 << " " << arr.size() << endl;
-                       isSorted = 1;
-                   }
-                   
-               }
-           }
-           else {
-               for(int i = 0; i < arr.size(); i++) {
-                   if(arr[i] > arr[i+1]) {
-                       l = i;
-                       break;
-                   }
-               }
-               
-               for(int i = l+1; i < arr.size(); i++) {
-                   if(arr[i] > arr[l]) {
-                       r = i-1;
-                       break;
-                   }
-               }
-               
-               iter_swap(arr.begin()+l, arr.begin()+r);
-               
-               if(is_sorted(arr.begin(), arr.end())) {
-                   cout << "yes" << endl;
-                   cout << "swap " << l+1 << " " << r+1 << endl;
-                   isSorted = 1;
-               }
-               else {
-                   // swap back to normal form
-                   iter_swap(arr.begin()+l, arr.begin()+r);
-                   int maxNum = arr[0];
-                   int maxCount = 0;
-                   for(int i = 1; i < arr.size(); i++) {
-                       if(arr[i] > maxNum) {
-                           maxCount++;
-                           if(maxCount > 1) {
-                               break;
-                           }
-                           maxNum = arr[i];
-                           l = i;
-                       }
-                       else {
-                           r = i;
-                       }
-                   }
-                   //then reverse
-                   reverse(arr.begin()+l, arr.begin()+r+1);
-                   if(is_sorted(arr.begin(), arr.end())) {
-                       cout << "yes" << endl;
-                       cout << "reverse " << l+1 << " " << r+1 << endl;
-                       isSorted = 1;
-                   }
-                   
-               }
+    else {
+
             
-           }
-       }
-       
-       if(isSorted == 0) {
-           cout << "no" << endl;
-       }
-   }
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr[i] > arr[i+1]) {
+                l = i;
+                break;
+            }
+        }
+        
+        for(int i = l+1; i < arr.size(); i++) {
+            if(arr[i] > arr[i-1]) {
+                r = i-1;
+                break;
+            }
+            else {
+                r = i;
+            }
+        }
+        
+        iter_swap(arr.begin()+l, arr.begin()+r);
+        
+        if(is_sorted(arr.begin(), arr.end())) {
+            cout << "yes" << endl;
+            cout << "swap " << l+1 << " " << r+1 << endl;
+            isSorted = 1;
+        }
+        else {
+            // swap back to normal form
+            iter_swap(arr.begin()+l, arr.begin()+r);
+     
+            //then reverse
+            reverse(arr.begin()+l, arr.begin()+r+1);
+            if(is_sorted(arr.begin(), arr.end())) {
+                cout << "yes" << endl;
+                cout << "reverse " << l+1 << " " << r+1 << endl;
+                isSorted = 1;
+            }
+            
+        }
+        
+        
+        if(isSorted == 0) {
+            cout << "no" << endl;
+        }
+    }
     
     
 }
