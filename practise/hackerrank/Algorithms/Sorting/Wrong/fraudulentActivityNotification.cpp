@@ -6,31 +6,47 @@ vector<string> split_string(string);
 
 // Complete the activityNotifications function below.
 int activityNotifications(vector<int> expenditure, int d) {
-    cout << "\n";
     int middle = 0;
     float median = 0;
-    int start = 0;
+    int end = d;
     int count = 0;
-    for(int i = d; i < expenditure.size(); i++) {
-        sort(expenditure.begin()+start, expenditure.begin()+i);
+    
+    // sort(expenditure.begin(), expenditure.begin()+end);
 
-        middle = (i+start)/2;
+    for(int i = 0; i+d < expenditure.size(); i++) {
+    //    int elToSwap = end-1;
+    //    for(int j = end-2; j >= 0; j--) {
+    //        if(expenditure[elToSwap] < expenditure[j]) {
+    //            swap(expenditure[elToSwap], expenditure[j]);
+    //            elToSwap = j;
+    //        }
+    //    }
+
+        // sort(expenditure.begin()+i, expenditure.begin()+end);
+
+        
+        middle = (end+i)/2;
         if(d % 2 == 0) {
             median = (expenditure[middle-1] + expenditure[middle])/2.0;
         }
         else {
             median = expenditure[middle];
         }
-
-        cout << expenditure[i] << " " << 2*median << endl;
-        if(expenditure[i] >= 2 * median) {
+        
+        for(int j = 0; j < expenditure.size(); j++) {
+            cout << expenditure[j] << " ";
+        }
+        cout << "\n";
+        
+        cout << expenditure[i+d] << " " << 2*median << endl;
+        if(expenditure[i+d] >= 2 * median) {
             count++;
         }
-        start++;
+        end++;
     }
-
+    
     return count;
-
+    
 }
 
 int main()
