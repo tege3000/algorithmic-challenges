@@ -11,48 +11,49 @@ vector<int> climbingLeaderboard(vector<int> scores, vector<int> alice) {
     int m = alice.size();
     
     set <int> distinctScores;
+    
+    
+    
     for(int i = 0; i < n; i++) {
         distinctScores.insert(scores[i]);
     }
     
     
+    vector <int> newV;
+    
+    for(auto i : distinctScores) {
+        newV.push_back(i);
+    }
+    
+    // for(int i = 0; i < newV.size(); i++) {
+    //     cout << newV[i] << " ";
+    // }
+    
+    
+    
     int score = 0;
-    int prev = *distinctScores.begin();
-    
-    int next = distinctScores.size() - 1;
-    
-    
-    set<int>::iterator begin = distinctScores.begin();
-    int lastIndex = distinctScores.size() - 1;
-    advance(begin, lastIndex);
 
-  
-    
-    
+    sort(newV.begin(), newV.end(), greater<int>());
     for(int i = 0; i < m; i++) {
-        score = alice[i];
-        
-        if(score < *distinctScores.begin()) {
-            ans.push_back(distinctScores.size() + 1);
-        }
-        else if(score >= *begin) {
-            ans.push_back(1);
-        }
-        
-        else {
-            set<int>::iterator start = distinctScores.begin();
-           
-            for(int j = 1; j <= distinctScores.size()-1; j++) {
-                advance(start, 1);
-                if(score >= prev && score < *start) {
-                    ans.push_back(distinctScores.size() - j +1);
-                }
-                prev = *start;
+        for(int j = newV.size()-1; j >=0; j--)  {
+            if(alice[i] > newV[0]) {
+                ans.push_back(1);
+                break;
+            }
+            else if(alice[i] < newV[j]) {
+                ans.push_back(j+2);
+                break;
+            }
+            else if (alice[i] == newV[j]) {
+                ans.push_back(j+1);
+                break;
+            }
+            else  {
+                continue;
             }
         }
         
-        prev = *distinctScores.begin();
-      
+        
     }
     
     
