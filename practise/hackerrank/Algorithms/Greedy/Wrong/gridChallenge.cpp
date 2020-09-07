@@ -5,14 +5,17 @@ using namespace std;
 // Complete the gridChallenge function below.
 string gridChallenge(vector<string> grid) {
     int n = grid.size();
+    if(n == 1) {
+        return "YES";
+    }
     for(int i = 0; i < n; i++) {
         sort(grid[i].begin(), grid[i].end());
     }
-
+    
     int isSorted = 0;
     for(int i = 0; i < grid[0].size(); i++) {
         for(int j = 0; j < n-1; j++) {
-            if(grid[j][i] < grid[j+1][i]) {
+            if(grid[j][i] <= grid[j+1][i]) {
                 isSorted = 1;
                 continue;
             }
@@ -22,14 +25,13 @@ string gridChallenge(vector<string> grid) {
             }
         }
     }
-
+    
     if(isSorted == 0) {
         return "NO";
     }
     return "YES";
-
+    
 }
-
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
