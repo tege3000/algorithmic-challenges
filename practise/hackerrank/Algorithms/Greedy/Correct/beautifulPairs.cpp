@@ -6,10 +6,14 @@ vector<string> split_string(string);
 
 // Complete the beautifulPairs function below.
 int beautifulPairs(vector<int> A, vector<int> B) {
-    int count = 0 , i = 0 , j = 0 , N = A.size();
+    int count = 0, N = A.size();
     sort(A.begin(), A.end());
     sort(B.begin(), B.end());
     
+
+    // for each element in A, find at least one element in B
+    // that matches it and has not yet been matched to a previous 
+    // element in A.
     for(int i = 0; i < N; i++) {
         if(find(B.begin(), B.end(), A[i]) != B.end()) {
             int pos = distance(B.begin(), find(B.begin(), B.end(), A[i]));
