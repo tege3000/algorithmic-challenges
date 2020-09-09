@@ -23,14 +23,19 @@ int beautifulPairs(vector<int> A, vector<int> B) {
         }
     }
     
-    if(count<N) {
+
+    if(count < N) {
         return count+1;
     }
     
-    if(count==N){
+    // Even if all elements in A match elements in B
+    // We still have to change an element in B, hence
+    // the beautiful set will have one less pair.
+    if(count == N){
         return count-1;
     }
-    return count;
+
+    return 0;
 }
 
 int main()
