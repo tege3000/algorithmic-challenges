@@ -9,21 +9,16 @@ int beautifulPairs(vector<int> A, vector<int> B) {
     int count = 0 , i = 0 , j = 0 , N = A.size();
     sort(A.begin(), A.end());
     sort(B.begin(), B.end());
-    while(i<N && j<N)
-    {
-        int diff = A[i]-B[j];
-        if(diff==0){
+    
+    for(int i = 0; i < N; i++) {
+        if(find(B.begin(), B.end(), A[i]) != B.end()) {
+            int pos = distance(B.begin(), find(B.begin(), B.end(), A[i]));
+            B[pos] = INT_MAX;
+           
             count++;
-            i++ ;
-            j++;
-        }
-        else if(diff < 0) {
-           i++;
-        }
-        else  {
-            j++;
         }
     }
+    
     if(count<N) {
         return count+1;
     }
