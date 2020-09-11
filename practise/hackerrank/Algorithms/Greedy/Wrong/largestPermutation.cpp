@@ -19,8 +19,16 @@ vector<int> largestPermutation(int k, vector<int> arr) {
     int n = arr.size();
     int count = 0;
     
+    // added this to optimize algorithm for very large values for n or k
+    if(k > n) {
+        sort(arr.begin(), arr.end(), greater<int>());
+        return arr;
+        
+    }
+    
+
     while(count < k) {
-        if(start < arr.size()) {
+        if(start < n) {
             int max_pos = distance(arr.begin(), max_element(arr.begin()+start, arr.end()));
             if(arr[start] != arr[max_pos]) {
                 swap(arr[start], arr[max_pos]);
