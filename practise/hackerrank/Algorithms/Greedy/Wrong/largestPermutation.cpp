@@ -17,16 +17,19 @@ bool isSortedDesc(vector<int> arr, int n) {
 vector<int> largestPermutation(int k, vector<int> arr) {
     int start = 0;
     for(int i = 0; i < k; i++) {
-        
-        int max_pos = distance(arr.begin(), max_element(arr.begin()+start, arr.end()));
-        swap(arr[start], arr[max_pos]);
-        
-        if(isSortedDesc(arr, arr.size()) == true) {
-            break;
+        if(start < arr.size()) {
+            int max_pos = distance(arr.begin(), max_element(arr.begin()+start, arr.end()));
+            swap(arr[start], arr[max_pos]);
+            
+            if(isSortedDesc(arr, arr.size()) == true) {
+                break;
+            }
+            
+            start++;
         }
-        
-        start++;
-        
+        else {
+            break;
+        }        
     }
     
     return arr;
