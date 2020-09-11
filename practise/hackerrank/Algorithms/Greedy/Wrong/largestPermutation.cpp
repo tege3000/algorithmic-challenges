@@ -5,20 +5,34 @@ using namespace std;
 vector<string> split_string(string);
 
 // Complete the largestPermutation function below.
+bool isSortedDesc(vector<int> arr, int n) {
+    for(int i = 0; i < n; i++) {
+        if(arr[i] < arr[i+1]) {
+            return false;
+        }
+    }
+    
+    return true;
+}
 vector<int> largestPermutation(int k, vector<int> arr) {
     int start = 0;
     for(int i = 0; i < k; i++) {
         
         int max_pos = distance(arr.begin(), max_element(arr.begin()+start, arr.end()));
         swap(arr[start], arr[max_pos]);
+        
+        if(isSortedDesc(arr, arr.size()) == true) {
+            break;
+        }
+        
         start++;
-            
         
     }
     
     return arr;
     
 }
+
 
 int main()
 {
