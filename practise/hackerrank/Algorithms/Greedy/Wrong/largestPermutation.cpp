@@ -6,7 +6,7 @@ vector<string> split_string(string);
 
 // Complete the largestPermutation function below.
 bool isSortedDesc(vector<int> arr, int n) {
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < n-1; i++) {
         if(arr[i] < arr[i+1]) {
             return false;
         }
@@ -16,12 +16,18 @@ bool isSortedDesc(vector<int> arr, int n) {
 }
 vector<int> largestPermutation(int k, vector<int> arr) {
     int start = 0;
-    for(int i = 0; i < k; i++) {
+    int n = arr.size();
+    int count = 0;
+    
+    while(count < k) {
         if(start < arr.size()) {
             int max_pos = distance(arr.begin(), max_element(arr.begin()+start, arr.end()));
-            swap(arr[start], arr[max_pos]);
-            
-            if(isSortedDesc(arr, arr.size()) == true) {
+            if(arr[start] != arr[max_pos]) {
+                swap(arr[start], arr[max_pos]);
+                count++;
+            }
+   
+            if(isSortedDesc(arr, n) == true) {
                 break;
             }
             
@@ -29,9 +35,9 @@ vector<int> largestPermutation(int k, vector<int> arr) {
         }
         else {
             break;
-        }        
+        }
     }
-    
+
     return arr;
     
 }
