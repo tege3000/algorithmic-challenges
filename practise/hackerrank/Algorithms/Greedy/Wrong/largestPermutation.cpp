@@ -5,21 +5,11 @@ using namespace std;
 vector<string> split_string(string);
 
 // Complete the largestPermutation function below.
-bool isSortedDesc(vector<int> arr, int n) {
-    for(int i = 0; i < n-1; i++) {
-        if(arr[i] < arr[i+1]) {
-            return false;
-        }
-    }
-    
-    return true;
-}
 vector<int> largestPermutation(int k, vector<int> arr) {
-    int start = 0;
-    int n = arr.size();
-    int count = 0;
+    long long int start = 0;
+    long long int n = arr.size();
+    long long int count = 0;
     
-    // added this to optimize algorithm for very large values for n or k
     if(k > n) {
         sort(arr.begin(), arr.end(), greater<int>());
         return arr;
@@ -33,10 +23,6 @@ vector<int> largestPermutation(int k, vector<int> arr) {
             if(arr[start] != arr[max_pos]) {
                 swap(arr[start], arr[max_pos]);
                 count++;
-            }
-   
-            if(isSortedDesc(arr, n) == true) {
-                break;
             }
             
             start++;
