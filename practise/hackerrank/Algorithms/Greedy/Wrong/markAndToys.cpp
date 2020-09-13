@@ -5,32 +5,43 @@ using namespace std;
 vector<string> split_string(string);
 
 // Complete the maximumToys function below.
-int maximumToys(vector<int> prices, int k) {
-    
+int getSmallestSubsetLenLessThanK(vector <int> prices, vector <int> subsetsArr, int n, int i, int k) {
     vector<vector<int>> ans;
-    for(int i = 0; i < prices.size(); i++) {
+    int maxLen = 0;
+    if(i == n) {
+        int size  = 0;
         int sum = 0;
-        vector<int> inner;
-        for(int j = i; j < prices.size(); j++) {
-            if(sum+prices[j] <= k) {
-                sum += prices[j];
-                inner.push_back(prices[j]);
+        for(int i = 0; i < n; i++) {
+            if(subsetsArr[i] != 0) {
+                sum += subsetsArr[i];
+                size++;
             }
         }
-        ans.push_back(inner);
-    }
-    
-    int len = 0;
-    int size = 0;
-    for(int i = 0; i < ans.size(); i++) {
-        size = ans[i].size();
-        len = max(size, len);
-        for(int j = 0; j < size; j++) {
-            cout << ans[i][j] << " ";
+        
+        if(sum <= k) {
+             return size;
         }
-        cout << "\n";
+    }
+    else {
+        subsetsArr[i] = 0;
+        maxLen = max(getSmallestSubsetLenLessThanK(prices, subsetsArr, n, i+1, k), maxLen);
+        
+        subsetsArr[i] = prices[i];
+        maxLen = max(getSmallestSubsetLenLessThanK(prices, subsetsArr, n, i+1, k), maxLen);
     }
     
+    return maxLen;
+    
+}
+
+int maximumToys(vector<int> prices, int k) {
+    int len = 0;
+    int n = prices.size();
+    vector<int> subsetsArr(n, 0);
+
+    
+    len = getSmallestSubsetLenLessThanK(prices, subsetsArr, n, 0, k);
+
     return len;
 }
 
