@@ -11,10 +11,10 @@ int maximumToys(vector<int> prices, int k) {
     for(int i = 0; i < prices.size(); i++) {
         int sum = 0;
         vector<int> inner;
-        for(int j = 0; j < prices.size(); j++) {
+        for(int j = i; j < prices.size(); j++) {
             if(sum+prices[j] <= k) {
                 sum += prices[j];
-                inner.push_back(prices[i]);
+                inner.push_back(prices[j]);
             }
         }
         ans.push_back(inner);
@@ -25,6 +25,10 @@ int maximumToys(vector<int> prices, int k) {
     for(int i = 0; i < ans.size(); i++) {
         size = ans[i].size();
         len = max(size, len);
+        for(int j = 0; j < size; j++) {
+            cout << ans[i][j] << " ";
+        }
+        cout << "\n";
     }
     
     return len;
