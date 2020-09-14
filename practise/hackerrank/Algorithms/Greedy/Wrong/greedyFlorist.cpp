@@ -6,18 +6,24 @@ vector<string> split_string(string);
 
 // Complete the getMinimumCost function below.
 int getMinimumCost(int k, vector<int> c) {
+    sort(c.begin(), c.end());
     int cost = 0;
     
     int n = c.size();
-    
-    for(int i = n-1; i > (n-1) - k; i--) {
-        cost += c[i];
+    int end = n-1;
+    int limit = 0;
+    int j = 1;
+    while(limit >= 0) {
+        limit = end - k;
+        for(int i = end; i > limit; i--) {
+            cout << j * c[i] << endl;
+            cost += j * c[i];
+        }
+
+        end = limit;
+        j++;
     }
-    
-    for(int i = 0; i <= (n-1) - k; i++) {
-        cost += 2 * c[i];
-    }
-    
+
     return cost;
 }
 
