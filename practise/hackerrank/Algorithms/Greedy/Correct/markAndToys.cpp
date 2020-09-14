@@ -6,21 +6,17 @@ vector<string> split_string(string);
 
 // Complete the maximumToys function below.
 int maximumToys(vector<int> prices, int k) {
-    sort(prices.begin(), prices.end(), greater<int>());
+    sort(prices.begin(), prices.end());
     int maxLen = 0;
+    int sum = 0;
     for(int i = 0; i < prices.size(); i++) {
-        int sum = 0;
-        int len = 0;
-        for(int j = i; j < prices.size(); j++) {
-            sum += prices[j];
-            if(sum > k) {
-                break;
-            }
-            else {
-                len++;
-            }
+        sum += prices[i];
+        if(sum > k) {
+            break;
         }
-        maxLen = max(maxLen, len);
+        else {
+            maxLen++;
+        }
     }
     return maxLen;
 }
