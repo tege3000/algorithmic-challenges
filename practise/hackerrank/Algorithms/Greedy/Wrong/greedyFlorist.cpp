@@ -13,14 +13,13 @@ int getMinimumCost(int k, vector<int> c) {
     int end = n-1;
     int limit = 0;
     int j = 1;
-    while(limit >= 0) {
-        limit = end - k;
-        for(int i = end; i > limit; i--) {
+    while(end >= 0) {
+        for(int i = end; i > end - k; i--) {
             cout << j * c[i] << endl;
             cost += j * c[i];
         }
 
-        end = limit;
+        end = end-k;
         j++;
     }
 
