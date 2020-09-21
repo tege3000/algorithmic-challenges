@@ -118,7 +118,7 @@ int boardCutting(vector<int> cost_y, vector<int> cost_x) {
         
     }
     
-    return sum;
+    return sum % 1000000007;
 }
 
 int main()
