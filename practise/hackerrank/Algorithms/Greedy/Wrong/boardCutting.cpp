@@ -73,10 +73,11 @@ int boardCutting(vector<int> cost_y, vector<int> cost_x) {
     
     
     
-    int val = 0 , index = 0, flag = 0;
-    int sum = 0;
+    long long int val = 0;
+    int index = 0, flag = 0;
+    long long int sum = 0;
     int maxEl = 0;
-    int countMax = 1;
+    long long int countMax = 1;
     for(int i = 0; i < combined.size(); i++) {
         val = combined[i][0];
         index = combined[i][1];
