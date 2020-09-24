@@ -18,35 +18,47 @@ vector<string> split(const string &);
  */
 
 vector<int> dynamicArray(int n, vector<vector<int>> queries) {
-    int type, x, y;
+    int type;
+    int indexPow, index;
+
+    int x, y;
+    int lastAns = 0;
+   
     
     vector<vector<int>> seqList;
     for(int i = 0; i < n; i++) {
-        seqList.push_back({0});
+        seqList.push_back({});
     }
+    
     vector<int> res;
-
-    int lastAns = 0;
-    int indexPow, index;
 
     for(int i = 0; i < queries.size(); i++) {
         type = queries[i][0];
         x = queries[i][1];
         y = queries[i][2];
         
+        cout << type <<  " " << x << " " << y << endl;
         
         if(type == 1) {
-            indexPow = pow(x, lastAns);
-            index = indexPow % n;
+            index = (x^lastAns) % n;
+    
             seqList[index].push_back(y);
         }
         else {
-            indexPow = pow(x, lastAns);
-            index = indexPow % n;
+            index = (x^lastAns) % n;
             
-            lastAns = seqList[index][y] % seqList[index].size();
+
+            lastAns = seqList[index][y];
             res.push_back(lastAns);
             
+        }
+    
+        
+        for(int i = 0; i < seqList.size(); i++) {
+            for(int j = 0; j < seqList[i].size(); j++) {
+                cout << seqList[i][j] << " ";
+            }
+            cout << "\n";
         }
 
     }
