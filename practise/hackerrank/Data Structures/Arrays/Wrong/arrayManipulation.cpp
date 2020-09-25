@@ -7,24 +7,25 @@ vector<string> split_string(string);
 // Complete the arrayManipulation function below.
 long arrayManipulation(int n, vector<vector<int>> queries) {
     long ans = 0;
-    int m = queries.size();
-    vector <int> op;
+    long m = queries.size();
+    vector <long> op;
     
-    for(int i = 0; i < n; i++) {
+    for(long i = 0; i < n; i++) {
         op.push_back(0);
     }
     
-    int a, b, k;
-    for(int i = 0; i < m; i++) {
+    long a, b, k;
+    for(long i = 0; i < m; i++) {
         a = queries[i][0];
         b = queries[i][1];
         k = queries[i][2];
         
-        for(int j = a-1; j <= b-1; j++) {
+        for(long j = a-1; j <= b-1; j++) {
             op[j] += k;
         }
     }
-//    
+    
+//
 //    for(int i = 0; i < n; i++) {
 //        cout << op[i] << " ";
 //    }
@@ -34,7 +35,6 @@ long arrayManipulation(int n, vector<vector<int>> queries) {
     
     return ans;
 }
-
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
