@@ -23,7 +23,7 @@ vector<int> countSubstrings(string s, vector<vector<int>> queries) {
         string c;
         int size = (r-l)+1;
         for(int j = size; j > 0; j--){
-//            cout << "************************" << endl;
+            //            cout << "************************" << endl;
             for(int k = l; k <= r; k++) {
                 string res = "";
                 
@@ -31,17 +31,19 @@ vector<int> countSubstrings(string s, vector<vector<int>> queries) {
                     c = s[k+z];
                     res += c;
                 }
-//                cout << res <<  "\n";
-
+                //                cout << res <<  "\n";
+                
                 distinct.push_back(res);
-
+                
                 
             }
         }
         
-//        cout << "complete" << endl;
+        //        cout << "complete" << endl;
         
-
+        //TODO: (NEXT STEP) FIND THE DUPLICATE STRINGS IN DISTINCT, AND REMOVE THEM
+        // THEN CONTINUE SOLVING QUESTION
+        
         for(auto i : distinct) {
             cout << i << " ";
         }
