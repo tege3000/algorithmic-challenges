@@ -33,6 +33,8 @@ vector<int> pseudoIsomorphicSubstrings(string s) {
 
     }
     
+    // CURRENTLY HAVE ALL THE SUBSTRINGS. NEXT STEP IS 
+    //TO REMOVE THE PSEUDO ISOMORPHIC SUBSTRINGS FROM THE SET
     return ans;
     
 }
