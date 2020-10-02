@@ -14,14 +14,13 @@ vector<int> countSubstrings(string s, vector<vector<int>> queries) {
     
     vector<int> ans;
     for(int i = 0; i < queries.size(); i++) {
-        vector <string> distinct;
+        set <string> distinct;
         int l = queries[i][0];
         int r = queries[i][1];
         
         string c;
         int size = (r-l)+1;
         for(int j = size; j > 0; j--){
-            //            cout << "************************" << endl;
             for(int k = l; k <= r; k++) {
                 string res = "";
                 
@@ -29,20 +28,10 @@ vector<int> countSubstrings(string s, vector<vector<int>> queries) {
                     c = s[k+z];
                     res += c;
                 }
-                if(!(find(distinct.begin(), distinct.end(), res) != distinct.end())) {
-//                    cout << res <<  "\n";
-                    distinct.push_back(res);
-                }
+                distinct.insert(res);
             }
             r--;
         }
-        
-        sort(distinct.begin(), distinct.end());
-
-//        for(auto j : distinct) {
-//            cout << j << " ";
-//        }
-//        cout << "\n";
         ans.push_back(distinct.size());
         
     }
