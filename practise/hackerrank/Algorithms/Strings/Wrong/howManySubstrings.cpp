@@ -13,31 +13,30 @@ vector<int> countSubstrings(string s, vector<vector<int>> queries) {
      */
     
     vector<int> ans;
+    string c;
     for(int i = 0; i < queries.size(); i++) {
-        set <string> distinct;
+        // set <string> distinct;
         int l = queries[i][0];
         int r = queries[i][1];
-        
-        string c;
-        int size = (r-l)+1;
-        for(int j = size; j > 0; j--){
-            for(int k = l; k <= r; k++) {
-                string res = "";
-                
-                for(int z = 0; z < size - (j-1); z++) {
-                    c = s[k+z];
-                    res += c;
-                }
-                distinct.insert(res);
+
+        c = s.substr(l, r-l+1);
+        cout << c << endl;
+        set<string> subString;
+        for(int j = 0; j < c.size(); j++) {
+            string d = "";
+            for(int k = j; k < c.size(); k++) {
+                d += c[k];
+                subString.insert(d);
             }
-            r--;
         }
-        ans.push_back(distinct.size());
+
+        ans.push_back(subString.size());
         
     }
     
     return ans;
 }
+
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
