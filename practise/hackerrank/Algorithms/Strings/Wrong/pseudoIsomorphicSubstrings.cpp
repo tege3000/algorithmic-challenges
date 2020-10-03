@@ -43,36 +43,45 @@ vector<int> pseudoIsomorphicSubstrings(string s) {
         
         sort(subNew.begin(), subNew.end(), comp);
         int count = subNew.size();
-        cout << "count is  " << count << "\n";
+//        cout << "count is  " << count << "\n";
         for(int j = 0; j < subNew.size(); j++) {
 //            cout << subNew[j] << " ";
             
             for(int k = j+1; k < subNew.size(); k++) {
                 if(subNew[j].size() == subNew[k].size()) {
                     int passCase2And3 = 0;
-                    for(int l = 0; l < subNew[j].size(); l++) {
-                        for(int m = l+1; m < subNew[j].size(); m++) {
-                            if(((subNew[j][l] == subNew[j][m]) && (subNew[k][l] == subNew[k][m]))||((subNew[j][l] != subNew[j][m]) && (subNew[k][l] != subNew[k][m]))) {
-                                passCase2And3 = 1;
+                    if(subNew[j].size() == 1) {
+                        if(subNew[j][0] != subNew[k][0]) {
+                            passCase2And3 = 1;
+                        }
+                    }
+                    else {
+                        for(int l = 0; l < subNew[j].size(); l++) {
+                            for(int m = l+1; m < subNew[j].size(); m++) {
+                                if(((subNew[j][l] == subNew[j][m]) && (subNew[k][l] == subNew[k][m]))||((subNew[j][l] != subNew[j][m]) && (subNew[k][l] != subNew[k][m]))) {
+//                                    cout << "----------passed-----------" << "\n";
+//                                    cout << subNew[j] << " " << subNew[k] << "\n";
+                                    passCase2And3 = 1;
+                                }
+                                else {
+//                                    cout << "----------failed-----------" << "\n";
+//                                    cout << subNew[j] << " " << subNew[k] << "\n";
+                                    passCase2And3 = 0;
+                                    break;
+                                }
                             }
-                            else {
-                                passCase2And3 = 0;
+                            
+                            if(passCase2And3 == 0) {
                                 break;
                             }
-                        }
-                        
-                        if(passCase2And3 == 0) {
-                            break;
                         }
                     }
                     
                     // if passes the tests then is a pseudo isomorphic sub string, so we delete it
                     if(passCase2And3 == 1) {
-                        cout << "cookoo " << "\n";
+//                        cout << "ALL CHARACTERS PASSED SO PSEUDO ISOMORPHIC " << "\n";
+//                        cout << subNew[j] << " " << subNew[k] << "\n";
                         count--;
-                    }
-                    else {
-                        continue;
                     }
                 }
                 else {
@@ -85,8 +94,6 @@ vector<int> pseudoIsomorphicSubstrings(string s) {
         
 //        cout << "\n\n";
 
-        
-        
     }
     
     
