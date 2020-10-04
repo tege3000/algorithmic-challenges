@@ -42,10 +42,8 @@ vector<int> pseudoIsomorphicSubstrings(string s) {
         
         
         sort(subNew.begin(), subNew.end(), comp);
-        int count = subNew.size();
-//        cout << "count is  " << count << "\n";
         for(int j = 0; j < subNew.size(); j++) {
-//            cout << subNew[j] << " ";
+                        cout << subNew[j] << " ";
             
             for(int k = j+1; k < subNew.size(); k++) {
                 if(subNew[j].size() == subNew[k].size()) {
@@ -64,8 +62,8 @@ vector<int> pseudoIsomorphicSubstrings(string s) {
                                     passCase2And3 = 1;
                                 }
                                 else {
-//                                    cout << "----------failed-----------" << "\n";
-//                                    cout << subNew[j] << " " << subNew[k] << "\n";
+                                    //                                    cout << "----------failed-----------" << "\n";
+                                    //                                    cout << subNew[j] << " " << subNew[k] << "\n";
                                     passCase2And3 = 0;
                                     break;
                                 }
@@ -81,7 +79,8 @@ vector<int> pseudoIsomorphicSubstrings(string s) {
                     if(passCase2And3 == 1) {
 //                        cout << "ALL CHARACTERS PASSED SO PSEUDO ISOMORPHIC " << "\n";
 //                        cout << subNew[j] << " " << subNew[k] << "\n";
-                        count--;
+                        subNew.erase(subNew.begin()+k);
+                        k--;
                     }
                 }
                 else {
@@ -90,10 +89,10 @@ vector<int> pseudoIsomorphicSubstrings(string s) {
             }
             
         }
-        ans.push_back(count);
+        ans.push_back(subNew.size());
         
-//        cout << "\n\n";
-
+//                cout << "\n\n";
+        
     }
     
     
