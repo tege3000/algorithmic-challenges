@@ -15,6 +15,8 @@ vector<string> split(const string &);
 void initialize(string s) {
     // This function is called once before all queries.
 
+    // apparently, after browsing discussion forum, 
+    // found out theres no need to do anything here
 }
 
 /*
@@ -31,7 +33,7 @@ int answerQuery(int l, int r, string s) {
     int ans = 0;
 
     string str = s.substr(l-1, (r-1)-(l-1) +1);
-//    cout << str << endl;
+    // cout << str << endl;
     
     unordered_map <char, int> mp;
     
@@ -49,6 +51,12 @@ int answerQuery(int l, int r, string s) {
     
     if(foundLenOf1 == 0) {
         ans = mp.size();
+    }
+    else {
+        //further processing
+        if(!((str.size() - ans) % 2 == 0)) {
+            ans++;
+        }
     }
     
     return ans % 1000000007;
