@@ -17,9 +17,7 @@ int letterIslands(string s, int k) {
             string res ="";
             for(int j = a; j <= i; j++) {
                 res += s[j];
-            }
-            //            cout << res << "\n";
-            
+            }            
             
             substrings.insert(res);
             
@@ -29,7 +27,6 @@ int letterIslands(string s, int k) {
     
     int count = 0;
     for(auto res : substrings) {
-//        cout << res << endl;
         string tmp = s;
         int pos = tmp.find(res);
         while(pos != -1) {
@@ -47,7 +44,6 @@ int letterIslands(string s, int k) {
             
         }
 
-//            cout << tmp << endl;
 
         int islandCount = 0;
         for(int i = 0; i < n; i++) {
@@ -57,8 +53,6 @@ int letterIslands(string s, int k) {
         }
 
         if(islandCount == k) {
-            cout << tmp << endl;
-            cout << res << endl;
             count++;
         }
     }
