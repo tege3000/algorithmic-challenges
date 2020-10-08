@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <string>
 using namespace std;
 
 /*
@@ -32,11 +33,18 @@ int letterIslands(string s, int k) {
         string tmp = s;
         int pos = tmp.find(res);
         while(pos != -1) {
+            int next_pos = tmp.find(res, pos+1);
+            while((next_pos - pos) <= res.size()) {
+                pos = tmp.find(res, pos+1);
+                next_pos = tmp.find(res, pos+1);
+            }
+            
             for(int j = pos; j < pos+res.size(); j++) {
                 tmp[j] = 'X';
             }
-
+     
             pos = tmp.find(res, pos+1);
+            
         }
 
 //            cout << tmp << endl;
@@ -49,9 +57,12 @@ int letterIslands(string s, int k) {
         }
 
         if(islandCount == k) {
+            cout << tmp << endl;
+            cout << res << endl;
             count++;
         }
     }
+    
     
     return count;
 }
