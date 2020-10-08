@@ -28,35 +28,32 @@ int letterIslands(string s, int k) {
     
     int count = 0;
     for(auto res : substrings) {
+//        cout << res << endl;
         string tmp = s;
         int pos = tmp.find(res);
-        if(res.size() < (n - k)) {
-            while(pos != -1) {
-                for(int j = pos; j < pos+res.size(); j++) {
-                    tmp[j] = 'X';
-                }
-                
-                pos = tmp.find(res, pos+1);
+        while(pos != -1) {
+            for(int j = pos; j < pos+res.size(); j++) {
+                tmp[j] = 'X';
             }
-            
+
+            pos = tmp.find(res, pos+1);
+        }
+
 //            cout << tmp << endl;
-            
-            int islandCount = 0;
-            for(int i = 0; i < n; i++) {
-                if(tmp[i] == 'X' && tmp[i-1] != 'X') {
-                    islandCount++;
-                }
+
+        int islandCount = 0;
+        for(int i = 0; i < n; i++) {
+            if(tmp[i] == 'X' && tmp[i-1] != 'X') {
+                islandCount++;
             }
-            
-            if(islandCount == k) {
-                count++;
-            }
+        }
+
+        if(islandCount == k) {
+            count++;
         }
     }
     
-    
     return count;
-    
 }
 
 int main()
