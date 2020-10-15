@@ -6,10 +6,6 @@ using namespace std;
 /*
  * Complete the buildPalindrome function below.
  */
-bool comp(string left, string right) {
-    return left < right;
-}
-
 bool isPalindrome(string s) {
     string original = s;
     reverse(s.begin(), s.end());
@@ -26,36 +22,43 @@ string buildPalindrome(string a, string b) {
     int n = a.size();
     int m = b.size();
     vector <string> palindromes;
-    // TODO: NEED TO EXPAND ALGORITHM TP WORK FOR EACH VALUES
-    // IN A AND ALSO FOR EACH VALUES IN B
-    // BASICALLY, MAKE CODE PASS THIS TEST CASE:
-    // 1
-    // jdfh
-    // fds
-    for(int i = 0; i < n; i++) {
-        string res;
-        for(int j = 0; j < m; j++) {
-            res = a[i];
-            for(int k = j; k < m; k++) {
-                res += b[k];
-                cout << res << " ";
-                if (isPalindrome(res)) {
-                    palindromes.push_back(res);
+    
+    for(int index  = 0; index < n; index++) {
+        string next = "";
+        for(int i = index; i < n; i++) {
+            string res;
+            for(int j = 0; j < m; j++) {
+                res = next + a[i];
+                for(int k = j; k < m; k++) {
+                    res += b[k];
+//                    cout << res << " ";
+                    if (isPalindrome(res)) {
+                        palindromes.push_back(res);
+                    }
                 }
+//                cout << "\n";
             }
-            cout << "\n";
+            
+            next.push_back(a[i]);
         }
     }
     
-//    sort(palindromes.begin(), palindromes.end(), comp);
+    if(palindromes.size() == 0) {
+        return "-1";
+    }
     
-//    for(auto i : palindromes) {
+    sort(palindromes.begin(), palindromes.end());
+    int maxLen = 0;
+    string resString;
+    for(auto i : palindromes) {
+        if(i.size() > maxLen) {
+            maxLen = i.size();
+            resString = i;
+        }
 //        cout << i << " ";
-//    }
-//    cout << "\n";
+    }
     
-    return "gabkabjkl";
-    
+    return resString;
 }
 
 int main()
