@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <limits.h>
 using namespace std;
 
 int isDistinct(int year) {
@@ -22,7 +23,7 @@ int main()
     int year;
     cin >> year;
     
-    for(int i = year+1; i < 9000; i++) {
+    for(int i = year+1; i <= INT_MAX; i++) {
         if(isDistinct(i) != -1) {
             cout << i << "\n";
             break;
