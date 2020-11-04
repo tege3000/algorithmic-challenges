@@ -1,4 +1,4 @@
-# algorithmic-challanges
+# algorithmic-challenges
 Here, you can find random solutions to algorithmic programming challenges i've solved. 
 
 Note: 
