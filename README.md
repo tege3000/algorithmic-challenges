@@ -1,5 +1,5 @@
-# competitive-programming
-Here, you can find random solutions to programming challenges i've solved. 
+# algorithmic-challenges
+Here, you can find random solutions to algorithmic programming challenges i've solved. 
 
 Note: 
 * File names are the same as the challange names
