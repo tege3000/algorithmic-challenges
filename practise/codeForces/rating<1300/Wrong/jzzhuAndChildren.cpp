@@ -11,6 +11,7 @@ int main() {
     int m;
     cin >> m;
     
+  
     
     int val;
     vector<string> v1;
@@ -19,15 +20,33 @@ int main() {
         string s = to_string(val) + to_string(i+1);
         
         v1.push_back(s);
+        cout << s << " ";
     }
     
-    while(v1.size() != 1) {
-        if((v1[0][0] - '0') <= m) {
+    int numSize = (*max_element(v1.begin(), v1.end())).size();
+    
+    numSize = to_string(n).size();
+    
+    cout << "\n";
+    string num, index;
+
+    while(v1.size() != 0) {
+        num = "";
+        index = "";
+        for(int i= 0; i < numSize; i++) {
+            num.push_back(v1[0][i]);
+        }
+        
+        for(int i = numSize; i < v1[0].size(); i++) {
+            index.push_back(v1[0][i]);
+        }
+        
+        if(stoi(num) <= m) {
             v1.erase(v1.begin());
 
         }
         else {
-            v1[0] = to_string(((v1[0][0] - '0') - m)) + v1[0][1];
+            v1[0] = to_string(((stoi(num)) - m)) + index;
             rotate(v1.begin(), v1.begin()+1, v1.end());
         }
 
@@ -38,7 +57,7 @@ int main() {
         
     }
     
-    cout << v1[0][1] << endl;
+    cout << index << endl;
     
 }
 
