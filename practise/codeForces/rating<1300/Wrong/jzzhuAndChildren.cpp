@@ -1,5 +1,4 @@
 #include <iostream>
-#include <unordered_map>
 #include <vector>
 #include <algorithm>
 
@@ -12,28 +11,26 @@ int main() {
     int m;
     cin >> m;
     
-    unordered_map<int, int> mp;
     
     int val;
-    vector<int> v1;
+    vector<string> v1;
     for(int i = 0; i < n; i++) {
         cin >> val;
+        string s = to_string(val) + to_string(i+1);
         
-        mp[val] = i+1;
-        v1.push_back(val);
+        v1.push_back(s);
     }
     
-    int lastPos = 0;
-    while(v1.size() != 0) {
-        if(v1[0] <= m) {
-            lastPos = mp[v1[0]];
+    while(v1.size() != 1) {
+        if((v1[0][0] - '0') <= m) {
             v1.erase(v1.begin());
+
         }
         else {
-            v1[0] -= m;
+            v1[0] = to_string(((v1[0][0] - '0') - m)) + v1[0][1];
             rotate(v1.begin(), v1.begin()+1, v1.end());
         }
-        
+
         for(int i = 0; i < v1.size(); i++) {
             cout << v1[i] << " ";
         }
@@ -41,7 +38,7 @@ int main() {
         
     }
     
-    cout << lastPos << endl;
-
+    cout << v1[0][1] << endl;
+    
 }
 
