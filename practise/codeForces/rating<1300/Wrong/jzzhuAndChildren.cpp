@@ -5,6 +5,18 @@
 
 using namespace std;
 
+/*
+ * TODO: Stuck on test case 32
+ * 
+ * Test: #32, time: 15 ms., memory: 0 KB, exit code: 0, checker exit code: 1, verdict: WRONG_ANSWER
+ * Input
+ * 1 1
+ * 100
+ * Output
+ * 91
+ * Answer
+ * 1
+ */
 int main() {
     int n;
     cin >> n;
