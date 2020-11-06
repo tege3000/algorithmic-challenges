@@ -44,6 +44,11 @@ int main() {
             num.pop_back();
         }
         
+        if(index[0] == '0') {
+            num.push_back('0');
+            index.erase(index.begin());
+        }
+        
 //        cout << "num " << num << endl;
 //        cout << "index " << index << endl;
         
