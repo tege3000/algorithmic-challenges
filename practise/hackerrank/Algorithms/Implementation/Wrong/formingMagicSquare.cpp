@@ -6,51 +6,56 @@ using namespace std;
 
 // Complete the formingMagicSquare function below.
 int formingMagicSquare(vector<vector<int>> s) {
-    int cost = 0;
-    int costSum = 0;
-    int magicNumber = 15;
+    // handle duplicate items in vector
+    //first of all if matrix is not distinct correct
+    vector<int> flattenS;
     
-    // handle the columns
+    vector <int> numsNotPresent;
     for(int i = 0; i < s.size(); i++) {
-        int rowSum = 0;
-        //go through each row, check if sum of values
-        //is equal to magicNumber
         for(int j = 0; j < s.size(); j++) {
-            rowSum += s[i][j];
-        }
-        
-        cout << "index i: " << i << "has rowSum of " << rowSum << endl;
-        // if the rowSum is not equal to the magic number,
-        // we want to ensure that that row eventually equals the magic number
-        // also we want to make sure that for that row, all the columns that intersect
-        // with it have a sum equal to the magic number.
-        if(rowSum != magicNumber) {
-            //check the columns for that spefic row
-            for(int a = 0; a < s.size(); a++) {
-                int colSum = 0;
-                for(int b = 0; b< s.size(); b++) {
-                    colSum += s[b][a];
-                
-                }
-                
-                cout << "Under index i " << i << ", index a: " << a << "has colSum of " << colSum << endl;
-
-                if(colSum != magicNumber) {
-                    int oldval = s[i][a];
-                    s[i][a] = magicNumber - (colSum - oldval);
-                    cout << "We changed this " << oldval << " to this " << s[i][a] << endl;
-                    cost = abs(s[i][a] - oldval);
-                    costSum += cost;
-                }
-            }
-            
-            
+            flattenS.push_back(s[i][j]);
         }
     }
     
+    cout << "flattenened array: ";
+    for(int i = 0; i < flattenS.size(); i++) {
+        cout << flattenS[i] << " ";
+    }
+    cout << "\n";
     
+    for(int i = 1; i <= 9; i++) {
+        if(!(find(flattenS.begin(), flattenS.end(), i) != flattenS.end())) {
+            numsNotPresent.push_back(i);
+        }
+    }
     
-    cout << "New 3x3 matrix is now: " << endl;
+    cout << "Nums not present array: ";
+    for(int i = 0; i < numsNotPresent.size(); i++) {
+        cout << numsNotPresent[i] << " ";
+    }
+    cout << "\n";
+    
+    int index = 0;
+    // if we have some missing numbers, then we change those missing numbers
+    if(numsNotPresent.size() > 0) {
+        for(int i = 0; i < flattenS.size()-1; i++) {
+            if(find(flattenS.begin()+(i+1), flattenS.end(), flattenS[i]) != flattenS.end()) {
+                flattenS[i] = numsNotPresent[index];
+                index++;
+            }
+        }
+    }
+    
+    // now make s distinct
+    index = 0;
+    for(int i = 0; i < s.size(); i++) {
+        for(int j = 0; j < s.size(); j++) {
+            s[i][j] = flattenS[index];
+            index++;
+        }
+    }
+    
+    cout << "After setup matrix is now: " << endl;
     
     for(auto i : s) {
         for(auto j: i) {
@@ -58,9 +63,17 @@ int formingMagicSquare(vector<vector<int>> s) {
         }
         cout << "\n";
     }
+    cout << "\n";
+    
+    
+    // Now proceed to solution
+    // TODO: COME UP WITH AN ALGORITHM
+    
+    int costSum = 0;
+    
+    
     
     return costSum;
-    
 }
 
 int main()
