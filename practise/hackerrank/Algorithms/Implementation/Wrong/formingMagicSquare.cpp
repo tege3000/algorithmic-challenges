@@ -6,69 +6,20 @@ using namespace std;
 
 // Complete the formingMagicSquare function below.
 int formingMagicSquare(vector<vector<int>> s) {
-    // handle duplicate items in vector
-    //first of all if matrix is not distinct correct
-    vector<int> flattenS;
-    
-    vector <int> numsNotPresent;
-    for(int i = 0; i < s.size(); i++) {
-        for(int j = 0; j < s.size(); j++) {
-            flattenS.push_back(s[i][j]);
-        }
-    }
-    
-    cout << "flattenened array: ";
-    for(int i = 0; i < flattenS.size(); i++) {
-        cout << flattenS[i] << " ";
-    }
-    cout << "\n";
-    
-    for(int i = 1; i <= 9; i++) {
-        if(!(find(flattenS.begin(), flattenS.end(), i) != flattenS.end())) {
-            numsNotPresent.push_back(i);
-        }
-    }
-    
-    cout << "Nums not present array: ";
-    for(int i = 0; i < numsNotPresent.size(); i++) {
-        cout << numsNotPresent[i] << " ";
-    }
-    cout << "\n";
-    
-    int index = 0;
-    // if we have some missing numbers, then we change those missing numbers
-    if(numsNotPresent.size() > 0) {
-        for(int i = 0; i < flattenS.size()-1; i++) {
-            if(find(flattenS.begin()+(i+1), flattenS.end(), flattenS[i]) != flattenS.end()) {
-                flattenS[i] = numsNotPresent[index];
-                index++;
-            }
-        }
-    }
-    
-    // now make s distinct
-    index = 0;
-    for(int i = 0; i < s.size(); i++) {
-        for(int j = 0; j < s.size(); j++) {
-            s[i][j] = flattenS[index];
-            index++;
-        }
-    }
-    
-    cout << "After setup matrix is now: " << endl;
-    
-    for(auto i : s) {
-        for(auto j: i) {
-            cout << j << " ";
-        }
-        cout << "\n";
-    }
-    cout << "\n";
-    
+    vector<vector<vector<int>>> pre = {
+        {{8, 1, 6}, {3, 5, 7}, {4, 9, 2}},
+        {{6, 1, 8}, {7, 5, 3}, {2, 9, 4}},
+        {{4, 9, 2}, {3, 5, 7}, {8, 1, 6}},
+        {{2, 9, 4}, {7, 5, 3}, {6, 1, 8}},
+        {{8, 3, 4}, {1, 5, 9}, {6, 7, 2}},
+        {{4, 3, 8}, {9, 5, 1}, {2, 7, 6}},
+        {{6, 7, 2}, {1, 5, 9}, {8, 3, 4}},
+        {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}},
+    };
     
     // Now proceed to solution
-    // TODO: COME UP WITH AN ALGORITHM
-    
+    // find a way to parse through s and check if it can be
+    // transformed into one of the magic squares in pre, at minimal cost
     int costSum = 0;
     
     
