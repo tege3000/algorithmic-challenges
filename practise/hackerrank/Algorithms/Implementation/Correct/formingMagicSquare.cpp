@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -20,32 +18,50 @@ int formingMagicSquare(vector<vector<int>> s) {
     // Now proceed to solution
     // find a way to parse through s and check if it can be
     // transformed into one of the magic squares in pre, at minimal cost
-    int costSum = 0;
+    int cost = 0;
+    int minCost = INT_MAX;
     
-    
-    
-    return costSum;
+    for(int i = 0; i < pre.size(); i++) {
+        int cost = 0;
+        for(int j = 0; j < pre[i].size(); j++) {
+            for(int k = 0; k < pre[i][j].size(); k++) {
+                if(s[j][k] != pre[i][j][k]) {
+                    cost += abs(s[j][k] - pre[i][j][k]);
+                }
+            }
+        }
+        
+        cout << "cost for index " << i << " is " << cost << endl;
+        
+        if (cost < minCost) {
+            minCost = cost;
+        }
+    }
+   
+    return minCost;
 }
+
 
 int main()
 {
-    
+    ofstream fout(getenv("OUTPUT_PATH"));
+
     vector<vector<int>> s(3);
     for (int i = 0; i < 3; i++) {
         s[i].resize(3);
-        
+
         for (int j = 0; j < 3; j++) {
             cin >> s[i][j];
         }
-        
+
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-    
+
     int result = formingMagicSquare(s);
-    
-    cout << result << "\n";
-    
-    
+
+    fout << result << "\n";
+
+    fout.close();
+
     return 0;
 }
-
